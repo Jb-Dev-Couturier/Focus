@@ -10,9 +10,9 @@ const PublicRouter = () => {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
 
-        <Route path="/home" element={<Home />} />
-        <Route path="/profil" element={<Profil />} />
-        <Route path="/trending" element={<Trending />} />
+        <Route path="home" element={<Home />} />
+        <Route path="profil" element={<Profil />} />
+        <Route path="trending" element={<Trending />} />
 
         <Route path="*" element={<PageError />} />
       </Route>

@@ -1,13 +1,15 @@
-
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PublicRouter from '@/pages/public/PublicRouter';
-
+import AdminRouter from './pages/Admin/AdminRouter';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <PublicRouter/>
+        <Routes>
+          <Route path="/*" element={<PublicRouter />} />
+          <Route path="/admin/*" element={<AdminRouter />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
