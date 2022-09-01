@@ -1,0 +1,62 @@
+.get-friends-container {
+  width: 356px;
+  border-radius: 20px;
+  padding: 20px 20px 10px;
+  color: $color-3;
+  background-image: radial-gradient(circle at 11% 32%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 5%,transparent 5%, transparent 95%),radial-gradient(circle at 89% 30%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 5%,transparent 5%, transparent 95%),radial-gradient(circle at 76% 90%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 83% 14%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 62% 81%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 34% 3%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 6%,transparent 6%, transparent 94%),radial-gradient(circle at 19% 1%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 48% 14%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 54% 23%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 4%,transparent 4%, transparent 96%),radial-gradient(circle at 10% 37%, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0.2) 4%,transparent 4%, transparent 96%),linear-gradient(299deg, rgba(255,225,217, 0.22),rgb(0,195,255));
+
+  h4 {
+    font-size: 1.4rem;
+    color: $color-3;
+  }
+  .icon {
+    margin: 16px auto;
+    width: 100%;
+    text-align: center;
+    i {
+      font-size: 1.6rem;
+      color: $color-3;
+    }
+  }
+  ul {
+    width: 100%;
+    padding: 14px 0 0;
+
+    .user-hint {
+      display: grid;
+      grid-template-columns: 20% 50% 30%;
+      align-items: center;
+      margin: 8px 0;
+
+      img {
+        height: 46px;
+        width: 46px;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 0 2px rgba(51, 51, 51, 0.377);
+      }
+      p {
+        text-align: left;
+        font-size: 0.9rem;
+        font-family: $font-3;
+      }
+      span {
+        text-align: right;
+
+        button {
+          background: $color-1;
+          color: $color-3;
+          padding: 10px 24px 8px;
+          transition: 0.2s;
+          border-radius: 20px;
+          font-size: 0.9rem;
+
+          &:hover {
+            background: $color-4;
+            color: $color-1;
+          }
+        }
+      }
+    }
+  }
+}

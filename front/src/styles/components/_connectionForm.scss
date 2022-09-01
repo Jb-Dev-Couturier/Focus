@@ -1,0 +1,114 @@
+.connection-from {
+  border: 2px solid $color-1;
+  width: 400px;
+  margin: 35px auto 0;
+  padding: 20px 0;
+  user-select: none;
+  text-align: center;
+
+  h3 {
+    padding: 10px 0 15px;
+  }
+
+  ul {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+
+    li {
+      background: $color-2;
+      color: $white;
+      width: 130px;
+      padding: 10px 0;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 3px 3px 1px rgba(51, 51, 51, 0.418);
+
+      &:hover {
+        background: $color-1;
+      }
+    }
+  }
+
+  .active-btn {
+    background: $color-1;
+  }
+  form {
+    width: 400px;
+    margin: 10px auto 0;
+    padding: 20px;
+  }
+}
+
+.box {
+  margin: 10px auto;
+  position: relative;
+  width: 270px;
+
+  .inputBox {
+    position: relative;
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+
+    input {
+      position: relative;
+      width: 100%;
+      padding: 10px 5px;
+    }
+    #togglebtn {
+      position: absolute;
+
+      top: 30px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: $color-4;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        color: $color-3;
+      }
+    }
+  }
+}
+
+.validation{
+  
+  background: $color-2;
+  border: 1px solid $color-3;
+  margin-top: 20px;
+  border-radius: 25px;
+  text-align: justify;
+  
+
+  ul{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    pointer-events: none;
+
+    li{
+      font-size: 0.85rem;
+      color: white;
+      transition: .5s;
+      &:hover{
+        transform: none !important;
+        
+      }
+
+      i{
+        width: 20px;
+        height: 10px;
+        display: inline-flex;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
