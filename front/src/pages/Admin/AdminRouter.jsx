@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { LayoutAdmin, Dashboard} from '@/pages/Admin';
+import { LayoutAdmin, Dashboard, AdminProfil, PostsList ,UsersList} from '@/pages/Admin';
 import PageError from '@/_utils/PageError';
 
 const AdminRouter = () => {
@@ -11,6 +11,9 @@ const AdminRouter = () => {
         <Route index element={<Dashboard />} />
 
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="profil" element={<AdminProfil />} />
+        <Route path="users" element={<UsersList />} />
+        <Route path="posts" element={<PostsList />} />
 
         <Route path="*" element={<PageError />} />
       </Route>

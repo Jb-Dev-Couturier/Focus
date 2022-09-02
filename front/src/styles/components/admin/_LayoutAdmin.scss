@@ -1,0 +1,79 @@
+.LayoutAdmin {
+  .Admin {
+    position: fixed;
+
+    .containerAdminNavLeft {
+      height: 100%;
+      width: 50px;
+      position: fixed;
+      top: 55px;
+      left: -5px;
+      border-radius: 6px;
+      box-shadow: 18px -2px 0px $color-1, 22px 4px 0px 0px $shadow;
+      z-index: 200;
+      &::after {
+        content: '';
+        height: 100%;
+        border-radius: 6px;
+        width: 60px;
+        left: 5px;
+        top: 0;
+        position: absolute;
+        backdrop-filter: blur(3px);
+        background: rgba(255, 255, 255, 0.9);
+        z-index: -8;
+      }
+
+      .icons {
+        top: 65px;
+        left: 1px;
+
+        .iconsSVGAdmin {
+          color: $color-3;
+          font-size: 44px;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            color: $white;
+            animation: rotate-vert-center 0.8s ease;
+          }
+        }
+        .active-left-nav-admin {
+          position: relative;
+
+          .iconsSVGAdmin {
+            color: $color-1;
+            &:hover {
+              color: $color-3;
+            }
+          }
+          &:hover::after {
+            display: initial;
+          }
+
+          &::after {
+            content: '';
+            height: 40px;
+            width: 5px;
+            position: absolute;
+            background: $color-1;
+            left: -7px;
+            bottom: 8px;
+            border-radius: 40px;
+            transform: scaleY(0);
+            animation: scale 1s ease forwards;
+            @keyframes scale {
+              to {
+                transform: scaleY(1);
+              }
+            }
+            @media screen and(max-width: 590px) {
+              display: none;
+              height: 33px;
+              left: -8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

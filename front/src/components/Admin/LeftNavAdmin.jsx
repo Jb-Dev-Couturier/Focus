@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Person2RoundedIcon from '@mui/icons-material/Person2Rounded';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import RocketRoundedIcon from '@mui/icons-material/RocketRounded';
 
 const LeftNavAdmin = () => {
@@ -11,34 +12,49 @@ const LeftNavAdmin = () => {
     pathname = window.location.pathname;
   }, [window.location.pathname]);
   return (
-    <aside className="left-nav-container">
-      <div className="icons">
-        <nav className="icons-bis">
-          <Link
-            to="/"
-            className={`${pathname.match('/') ? 'active-left-nav' : ''}`}
-          >
-            <HomeRoundedIcon className="iconsSVG" />
-          </Link>
-          <br />
-          <Link
-            to="/"
-            className={`${pathname.match('/') ? 'active-left-nav' : ''}`}
-          >
-            <Person2RoundedIcon className="iconsSVG" />
-          </Link>
-          <br />
-          <Link
-            to="/"
-            className={`${
-              pathname.match('/') ? 'active-left-nav' : ''
-            }`}
-          >
-            <RocketRoundedIcon className="iconsSVG" />
-          </Link>
-        </nav>
-      </div>
-    </aside>
+    <div className="containerAdminNavLeft">
+      <aside className="left-nav-container">
+        <div className="icons">
+          <nav className="icons-bis">
+            <Link
+              to="/admin/dashboard"
+              className={`${
+                pathname.match('/admin/dashboard') ? 'active-left-nav-admin' : ''
+              }`}
+            >
+              <DashboardIcon className="iconsSVGAdmin" />
+            </Link>
+            <br />
+            <Link
+              to="/admin/profil"
+              className={`${
+                pathname.match('/admin/profil') ? 'active-left-nav-admin' : ''
+              }`}
+            >
+              <Person2RoundedIcon className="iconsSVGAdmin" />
+            </Link>
+            <br />
+            <Link
+              to="/admin/users"
+              className={`${
+                pathname.match('/admin/users') ? 'active-left-nav-admin' : ''
+              }`}
+            >
+              <ManageAccountsIcon className="iconsSVGAdmin" />
+            </Link>
+            <br />
+            <Link
+              to="/admin/posts"
+              className={`${
+                pathname.match('/admin/posts') ? 'active-left-nav-admin' : ''
+              }`}
+            >
+              <RocketRoundedIcon className="iconsSVGAdmin" />
+            </Link>
+          </nav>
+        </div>
+      </aside>
+    </div>
   );
 };
 

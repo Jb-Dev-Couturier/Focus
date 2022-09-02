@@ -7,10 +7,9 @@ const LayoutAdmin = () => {
   return (
     <div className="LayoutAdmin">
       <TopBarAdmin />
-      <div className="home">
-        <LeftNavAdmin />
+      <div id="admin" className="Admin">
+        <Outlet />
       </div>
-      <Outlet />
     </div>
   );
 };
