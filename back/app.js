@@ -8,6 +8,7 @@ import bodyparser from 'body-parser';
 
 //appel des fichier routes
 import AuthRoute from './routes/authRoute.js'
+import UserRoute from './routes/userRoutes.js';
 
 //config pour variable envirronement
 dotenv.config();
@@ -54,5 +55,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //routes
 app.use('/api/auth', AuthRoute);
+app.use('/api/user', UserRoute);
 
 export default app;
