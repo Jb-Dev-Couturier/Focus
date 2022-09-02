@@ -7,7 +7,7 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const [pseudo, setPseudo] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [controlPassword, setControlPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
@@ -39,7 +39,7 @@ const SignUpForm = () => {
         url: `${process.env.REACT_APP_API_URL}auth/register`,
         data: {
           pseudo,
-          email,
+          username,
           password,
         },
       })
@@ -47,7 +47,7 @@ const SignUpForm = () => {
           console.log(res);
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
-            emailError.innerHTML = res.data.errors.email;
+            emailError.innerHTML = res.data.errors.username;
             passwordError.innerHTML = res.data.errors.password;
           } else {
             setFormSubmit(true);
@@ -95,8 +95,8 @@ const SignUpForm = () => {
             type="text"
             name="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => setUserName(e.target.value)}
+            value={username}
           />
           <div className="email error"></div>
           <br />

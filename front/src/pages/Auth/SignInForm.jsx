@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
-import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
@@ -16,16 +14,16 @@ const SignInForm = () => {
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}auth/login`,
-      //withCredentials: true,
+      withCredentials: true,
       data: {
-        email: email,
+        username: email,
         password: password,
       },
     })
       .then((res) => {
         console.log(res);
         if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
+          emailError.innerHTML = res.data.errors.username;
           passwordError.innerHTML = res.data.errors.password;
         } else {
           window.location = '/';
@@ -69,9 +67,9 @@ const SignInForm = () => {
           />
           <span id="togglebtn" onClick={handleViewPass}>
             {viewPass === 'password' ? (
-              <RemoveRedEyeRoundedIcon/>
+              <i className="fa-solid fa-eye"></i>
             ) : (
-              <VisibilityOffRoundedIcon/>
+              <i className="fa-solid fa-eye-slash"></i>
             )}
           </span>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { LayoutAdmin, Dashboard, AdminProfil, PostsList ,UsersList} from '../../pages/Admin';
-import PageError from '@/_utils/PageError';
+import PageError from '../../_utils/PageError';
 
 const AdminRouter = () => {
   return (
