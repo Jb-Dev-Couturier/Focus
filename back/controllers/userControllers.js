@@ -39,7 +39,6 @@ export const getUser = async (req, res) => {
 
 //updateUser
 export const updateUser = async (req, res) => {
-    
   if (!ObjectID.isValidObjectId(req.params.id))
     return res.status(400).send('ID unknow:' + req.params.id);
   const id = req.params.id;
@@ -50,27 +49,81 @@ export const updateUser = async (req, res) => {
       message:
         'Le Mot de passe doit faire 10 caractère au moins, comprenant une majuscule, une mininuscule et un moins un chiffre.',
     });
-  }else {
-
-      if (id === currentUserId || currentUserAdminStatus) {
-        try {
-          if (password) {
-            const salt = await bcrypt.genSalt(10);
-            req.body.password = await bcrypt.hash(password, salt);
-          }
-          const user = await UserModel.findByIdAndUpdate(id, req.body, {
-            new: true,
-          });
-    
-          res.status(200).json(user);
-        } catch (error) {
-          res.status(500).json(error);
+  } else {
+    if (id === currentUserId || currentUserAdminStatus) {
+      try {
+        if (password) {
+          const salt = await bcrypt.genSalt(10);
+          req.body.password = await bcrypt.hash(password, salt);
         }
-      } else {
-        res
-          .status(403)
-          .json('Accés interdit, mettez simplement VOTRE profil a jour');
-      }
-  }
+        const user = await UserModel.findByIdAndUpdate(id, req.body, {
+          new: true,
+        });
 
+        res.status(200).json(user);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+    } else {
+      res
+        .status(403)
+        .json('Accés interdit, mettez simplement VOTRE profil a jour');
+    }
+  }
+};
+
+
+// Delete a user
+export const deleteUser = async (req, res) => {
+  if (!ObjectID.isValidObjectId(req.params.id))
+    return res.status(400).send('ID unknown : ' + req.params.id);
+
+  try {
+    await UserModel.remove({ _id: req.params.id }).exec();
+    res.status(200).json({ message: 'Successfully deleted. ' });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+};
+
+// Follow a User
+export const followUser = async (req, res) => {
+  if (req.body.IdToFollow !== req.params.id) {
+    try {
+      const user = await UserModel.findById(req.params.id);
+      const currentUser = await UserModel.findById(req.body.IdToFollow);
+      if (!user.following.includes(req.body.IdToFollow)) {
+        await user.updateOne({ $push: { following: req.body.IdToFollow } });
+        await currentUser.updateOne({ $push: { followers: req.params.id } });
+        res.status(200).json('Utilisateur suivi');
+      } else {
+        res.status(403).json('Vous le suivez deja');
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json('Vous ne pouvez pas vous suivre vous meme');
+  }
+};
+
+// Unfollow a User
+export const unfollowUser = async (req, res) => {
+  if (req.body.IdToUnfollow !== req.params.id) {
+    try {
+      const user = await UserModel.findById(req.params.id);
+      const currentUser = await UserModel.findById(req.body.IdToUnfollow);
+      if (user.following.includes(req.body.IdToUnfollow)) {
+        await user.updateOne({ $pull: { following: req.body.IdToUnfollow } });
+        await currentUser.updateOne({ $pull: { followers: req.params.id } });
+        res.status(200).json('Utilisateur non suivi');
+      } else {
+        res.status(403).json('Vous ne le suivez pas');
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json('Vous ne pouvez pas ne plus vous suivre vous meme');
+  }
 };
