@@ -1,5 +1,5 @@
 import React from 'react';
-import TopBarAdmin from '@/components/Admin/TopBarAdmin';
+import TopBarAdmin from '../../components/Admin/TopBarAdmin';
 import { Outlet } from 'react-router-dom';
 
 const LayoutAdmin = () => {

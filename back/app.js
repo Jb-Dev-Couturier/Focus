@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import bodyparser from 'body-parser';
+import cors from 'cors';
 
 //appel des fichier routes
 import AuthRoute from './routes/authRoute.js'
@@ -10,13 +12,23 @@ import UserRoute from './routes/userRoutes.js';
 import PostRoute from './routes/PostRoute.js';
 import UploadRoute from './routes/UploadRoute.js';
 import UploadRouteProfil from './routes/UploadRouteProfil.js';
+import { checkUser, requireAuth } from './middleware/authCheck.js';
 
 //config pour variable envirronement
 dotenv.config();
 //variable pour app
 const app = express();
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  allowedHeaders: ['sessionId', 'Content-Type'],
+  exposedHeaders: ['sessionId'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+};
+app.use(cors(corsOptions));
 
-
+app.use(cookieParser());
 
 //analyse le corps de la requête HTTP (analyse requete entrante, assemble les morceau avec les donnee du formulaire et cree l'objet avec les donnée)
 app.use(bodyparser.json({ limit: '30mb', extended: true }));
@@ -38,6 +50,14 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+
+// jwt
+app.get('*', checkUser);
+app.get('/jwtid', requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user._id);
+});
+
 
 //connection a mongoose
 mongoose

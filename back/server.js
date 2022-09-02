@@ -2,8 +2,7 @@ import http from 'http'
 import app from './app.js'
 
 //resoudre probleme de cors policy
-import cors from 'cors'
-app.use(cors()); 
+
 
 
 const normalizePort = (val) => {

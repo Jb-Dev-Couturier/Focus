@@ -1,24 +1,38 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import UserModel from '../models/userModel.js';
 
-dotenv.config();
-
-export const authCheck = (req, res, next) => {
-  try {
-    //Extraction du token du header authorization et utilisation de split pour récupérer tous les éléments après l'espace du header
-    const token = req.headers.authorization.split(' ')[1];
-    //Décode le token
-    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    //Extrait l'id utilisateur et compare à celui extrait du token
-    const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
-      throw 'Id utilisateur invalide !';
-    } else {
-      next();
-    }
-  } catch {
-    res.status(401).json({
-      error: new Error('Requête invalide !'),
+export const checkUser = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, process.env.JWTKEY, async (err, decodedToken) => {
+      if (err) {
+        res.locals.user = null;
+        next();
+      } else {
+        let user = await UserModel.findById(decodedToken.id);
+        res.locals.user = user;
+        next();
+      }
     });
+  } else {
+    res.locals.user = null;
+    next();
+  }
+};
+
+export const requireAuth = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, process.env.JWTKEY, async (err, decodedToken) => {
+      if (err) {
+        console.log(err);
+        res.send(200).json('no token');
+      } else {
+        console.log(decodedToken.id);
+        next();
+      }
+    });
+  } else {
+    console.log('No token');
   }
 };

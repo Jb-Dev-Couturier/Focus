@@ -1,5 +1,5 @@
 import React from 'react'
-import LeftNav from '@/components/public/LeftNav';
+import LeftNav from '../../components/public/LeftNav';
 
 const Trending = () => {
   return (

@@ -1,31 +1,24 @@
 import UserModel from '../models/userModel.js';
 import { signUpErrors, signInErrors } from '../utils/errors.utils.js';
-import bcrypt from 'bcrypt';
 
-//enregistrements nouvelle utilisateur
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWTKEY, {
+    expiresIn: maxAge,
+  });
+};
+
+// Register new user
 export const registerUser = async (req, res) => {
-  const salt = await bcrypt.genSalt(10);
-  const hashedPass = await bcrypt.hash(req.body.password, salt);
-  req.body.password = hashedPass;
-  const newUser = new UserModel(req.body);
-  const { email } = req.body;
+  const { pseudo, email, password } = req.body;
+
   try {
-    // addition new
-    const oldUser = await UserModel.findOne({ email });
-
-    if (oldUser)
-      return res.status(400).json({ message: 'User already exists' });
-
-    // changed
-    const user = await newUser.save();
-    const token = jwt.sign(
-      { email: user.email, id: user._id },
-      process.env.JWTKEY,
-      { expiresIn: '1h' }
-    );
-    res.status(200).json({ user, token });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    const user = await UserModel.create({ pseudo, email, password });
+    res.status(201).json({ user: user._id });
+  } catch (err) {
+    const errors = signUpErrors(err);
+    res.status(200).send({ errors });
   }
 };
 
@@ -36,25 +29,17 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await UserModel.findOne({ email: email });
-
-    if (user) {
-      const validity = await bcrypt.compare(password, user.password);
-
-      if (!validity) {
-        res.status(400).json('wrong password');
-      } else {
-        const token = jwt.sign(
-          { email: user.email, id: user._id },
-          process.env.JWTKEY,
-          { expiresIn: '1h' }
-        );
-        res.status(200).json({ user, token });
-      }
-    } else {
-      res.status(404).json('User not found');
-    }
+    const user = await UserModel.login(email, password);
+    const token = createToken(user._id);
+    res.cookie('jwt', token, { httpOnly: true, maxAge });
+    res.status(200).json({ user: user._id });
   } catch (err) {
-    res.status(500).json(err);
+    const errors = signInErrors(err);
+    res.status(200).json({ errors });
   }
+};
+
+export const logout = (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.redirect('/');
 };
