@@ -11,4 +11,11 @@
 @import './components/bubble.scss';
 @import './components/leftNav.scss';
 @import './pages/trending.scss';
-@import './pages/admin.scss';
+
+//admin
+@import './components/admin/LayoutAdmin.scss';
+@import './components/admin/dashboard.scss';
+@import './components/admin/cardPost.scss';
+@import './components/admin/editCardPost.scss';
+@import './components/admin/userCard.scss';
+@import './components/admin/userEdit.scss';
