@@ -1,14 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import bodyparser from 'body-parser';
 
 //appel des fichier routes
 import AuthRoute from './routes/authRoute.js'
 import UserRoute from './routes/userRoutes.js';
+import PostRoute from './routes/PostRoute.js';
 import UploadRoute from './routes/UploadRoute.js';
 import UploadRouteProfil from './routes/UploadRouteProfil.js';
 
@@ -17,9 +16,7 @@ dotenv.config();
 //variable pour app
 const app = express();
 
-//Utilisation du __dirname avec ES_modules (https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 
 //analyse le corps de la requête HTTP (analyse requete entrante, assemble les morceau avec les donnee du formulaire et cree l'objet avec les donnée)
 app.use(bodyparser.json({ limit: '30mb', extended: true }));
@@ -59,7 +56,7 @@ app.use('/images', express.static('images'))
 //routes
 app.use('/api/auth', AuthRoute);
 app.use('/api/user', UserRoute);
-
+app.use('/posts', PostRoute);
 app.use('/upload', UploadRoute);
 app.use('/uploadprofil', UploadRouteProfil);
 
