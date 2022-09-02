@@ -15,23 +15,27 @@ const LeftNav = () => {
       <div className="icons">
         <nav className="icons-bis">
           <Link
-            to="/home"
-            className={`${pathname.match('/home') ? 'active-left-nav' : ''}`}
+            to="/public/home"
+            className={`${
+              pathname.match('/public/home') ? 'active-left-nav' : ''
+            }`}
           >
             <HomeRoundedIcon className="iconsSVG" />
           </Link>
           <br />
           <Link
-            to="/profil"
-            className={`${pathname.match('/profil') ? 'active-left-nav' : ''}`}
+            to="/public/profil"
+            className={`${
+              pathname.match('/public/profil') ? 'active-left-nav' : ''
+            }`}
           >
             <Person2RoundedIcon className="iconsSVG" />
           </Link>
           <br />
           <Link
-            to="/trending"
+            to="/public/trending"
             className={`${
-              pathname.match('/trending') ? 'active-left-nav' : ''
+              pathname.match('/public/trending') ? 'active-left-nav' : ''
             }`}
           >
             <RocketRoundedIcon className="iconsSVG" />

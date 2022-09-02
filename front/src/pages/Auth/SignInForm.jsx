@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { UidContext } from '../../components/AppContext';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
-
+  
   const handleLogin = (e) => {
     e.preventDefault();
     const emailError = document.querySelector('.email.error');
     const passwordError = document.querySelector('.password.error');
-
+    
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}auth/login`,
@@ -20,13 +21,15 @@ const SignInForm = () => {
         password: password,
       },
     })
-      .then((res) => {
-        console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.username;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          window.location = '/';
+    .then((res) => {
+      console.log(res);
+      if (res.data.errors) {
+        emailError.innerHTML = res.data.errors.username;
+        passwordError.innerHTML = res.data.errors.password;
+      } else {
+        {
+            uid = '' ? (window.location = '/') : (window.location = '/');
+          }
         }
       })
       .catch((err) => {
