@@ -9,6 +9,8 @@ import bodyparser from 'body-parser';
 //appel des fichier routes
 import AuthRoute from './routes/authRoute.js'
 import UserRoute from './routes/userRoutes.js';
+import UploadRoute from './routes/UploadRoute.js';
+import UploadRouteProfil from './routes/UploadRouteProfil.js';
 
 //config pour variable envirronement
 dotenv.config();
@@ -51,10 +53,14 @@ mongoose
 
 
 //Gère la ressource "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(express.static('public'));
+app.use('/images', express.static('images'))
 
 //routes
 app.use('/api/auth', AuthRoute);
 app.use('/api/user', UserRoute);
+
+app.use('/upload', UploadRoute);
+app.use('/uploadprofil', UploadRouteProfil);
 
 export default app;
