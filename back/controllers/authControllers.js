@@ -4,29 +4,57 @@ import bcrypt from 'bcrypt';
 
 //enregistrements nouvelle utilisateur
 export const registerUser = async (req, res) => {
-  const { pseudo, email, password } = req.body;
-  //salt est la quatite de hachage de chaine de donnée
   const salt = await bcrypt.genSalt(10);
-  const hashedPass = await bcrypt.hash(password, salt);
-  const newUser = new UserModel({ pseudo, email, password: hashedPass });
-
+  const hashedPass = await bcrypt.hash(req.body.password, salt);
+  req.body.password = hashedPass;
+  const newUser = new UserModel(req.body);
+  const { email } = req.body;
   try {
-    await newUser.save();
-    res.status(201).json({ user: newUser._id });
+    // addition new
+    const oldUser = await UserModel.findOne({ email });
+
+    if (oldUser)
+      return res.status(400).json({ message: 'User already exists' });
+
+    // changed
+    const user = await newUser.save();
+    const token = jwt.sign(
+      { email: user.email, id: user._id },
+      process.env.JWTKEY,
+      { expiresIn: '1h' }
+    );
+    res.status(200).json({ user, token });
   } catch (error) {
-    const errors = signUpErrors(error);
-    res.status(200).send({ errors });
+    res.status(500).json({ message: error.message });
   }
 };
 
-//connection utilisateur
+// Login User
+
+// Changed
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+
   try {
-    const user = await UserModel.login(email, password);
-    res.status(200).json({ user });
-  } catch (error) {
-    const errors = signInErrors(error);
-    res.status(200).json({ errors });
+    const user = await UserModel.findOne({ email: email });
+
+    if (user) {
+      const validity = await bcrypt.compare(password, user.password);
+
+      if (!validity) {
+        res.status(400).json('wrong password');
+      } else {
+        const token = jwt.sign(
+          { email: user.email, id: user._id },
+          process.env.JWTKEY,
+          { expiresIn: '1h' }
+        );
+        res.status(200).json({ user, token });
+      }
+    } else {
+      res.status(404).json('User not found');
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
