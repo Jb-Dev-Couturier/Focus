@@ -1,17 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { logIn } from '../../actions/AuthActions.js';
 import axios from 'axios';
-import { UidContext } from '../../components/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
-  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const emailError = document.querySelector('.email.error');
     const passwordError = document.querySelector('.password.error');
-    
+
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}auth/login`,
@@ -21,15 +25,14 @@ const SignInForm = () => {
         password: password,
       },
     })
-    .then((res) => {
-      console.log(res);
-      if (res.data.errors) {
-        emailError.innerHTML = res.data.errors.username;
-        passwordError.innerHTML = res.data.errors.password;
-      } else {
-        {
-            uid = '' ? (window.location = '/') : (window.location = '/');
-          }
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.username;
+          passwordError.innerHTML = res.data.errors.password;
+        } else {
+
+          dispatch(logIn(res, navigate));
         }
       })
       .catch((err) => {

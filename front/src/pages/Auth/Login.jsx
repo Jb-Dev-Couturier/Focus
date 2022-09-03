@@ -46,7 +46,7 @@ const Log = (props) => {
               </li>
             </ul>
 
-            {signUpModal && <SignUpForm />}
+            {signUpModal && <SignUpForm data={uid} />}
             {signInModal && <SignInForm data={uid} />}
           </div>
         </div>
