@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 
+import { accountServices } from '../../_services/account.services';
+
 const SignInForm = () => {
+  let navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
@@ -28,7 +32,10 @@ const SignInForm = () => {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          //window.location = '/';
+          
+          accountServices.saveIdUser(res.data.userId);
+          accountServices.saveToken(res.data.token)
+          navigate('/admin')
         }
       })
       .catch((err) => {
