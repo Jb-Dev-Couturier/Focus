@@ -50,7 +50,7 @@ const Log = (props) => {
           </div>
         </div>
         <div className="img-container">
-          <img src="./img/login.gif" alt="img-log" />
+          <img src="../img/login.gif" alt="img-log" />
         </div>
       </div>
     </div>
