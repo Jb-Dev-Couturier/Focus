@@ -6,7 +6,7 @@ import multer from 'multer';
 //upload image Profil
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `../front/public/uploads/posts/`);
+    cb(null, `public/images`);
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('file',(req, res) => {
     
   try {
-      return res.status(200).json("File uploded successfully");
+      return res.status(200).json("Fichier telecharger correctement");
     } catch (error) {
       console.error(error);
     }

@@ -9,7 +9,7 @@ const TopBarAdmin = () => {
       <nav>
         <div className="nav-container">
           <div className="logo">
-            <Link to={'/admin/'}>
+            <Link to={'/'}>
               <div className="logo">
                 <LanguageOutlinedIcon />
                 <h3>Groupomania</h3>
@@ -19,7 +19,7 @@ const TopBarAdmin = () => {
           <ul>
             <li></li>
             <li className="welcome">
-              <h5>Bienvenue Administrateur</h5>
+                <h5>Bienvenue Administrateur</h5>
             </li>
             <LogoutRoundedIcon />
           </ul>

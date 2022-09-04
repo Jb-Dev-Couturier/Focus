@@ -1,5 +1,6 @@
 import UserModel from '../models/userModel.js';
-
+import bcrypt from 'bcrypt';
+import passwordSchema from '../models/passwordModels.js';
 import ObjectID from 'mongoose';
 
 // Get all users
@@ -36,35 +37,41 @@ export const getUser = async (req, res) => {
   }
 };
 
-// udpate a user
-
+//updateUser
 export const updateUser = async (req, res) => {
   if (!ObjectID.isValidObjectId(req.params.id))
     return res.status(400).send('ID unknow:' + req.params.id);
+  const id = req.params.id;
+  const { currentUserId, currentUserAdminStatus, password } = req.body;
 
-  try {
-    await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          pseudo: req.body.pseudo,
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          bio: req.body.bio,
-          livesIn: req.body.livesIn,
-          worksAt: req.body.worksAt,
-          relationship: req.body.relationship,
-          country: req.body.country,
-        },
-      },
-      { new: true, upsert: true, setDefaultsOnInsert: true }
-    )
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(500).json({ message: err });
+  if (!passwordSchema.validate(req.body.password)) {
+    res.status(400).json({
+      message:
+        'Le Mot de passe doit faire 10 caractère au moins, comprenant une majuscule, une mininuscule et un moins un chiffre.',
+    });
+  } else {
+    if (id === currentUserId || currentUserAdminStatus) {
+      try {
+        if (password) {
+          const salt = await bcrypt.genSalt(10);
+          req.body.password = await bcrypt.hash(password, salt);
+        }
+        const user = await UserModel.findByIdAndUpdate(id, req.body, {
+          new: true,
+        });
+
+        res.status(200).json(user);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+    } else {
+      res
+        .status(403)
+        .json('Accés interdit, mettez simplement VOTRE profil a jour');
+    }
   }
 };
+
 
 // Delete a user
 export const deleteUser = async (req, res) => {
@@ -80,7 +87,6 @@ export const deleteUser = async (req, res) => {
 };
 
 // Follow a User
-// changed
 export const followUser = async (req, res) => {
   if (req.body.IdToFollow !== req.params.id) {
     try {
@@ -102,7 +108,6 @@ export const followUser = async (req, res) => {
 };
 
 // Unfollow a User
-// changed
 export const unfollowUser = async (req, res) => {
   if (req.body.IdToUnfollow !== req.params.id) {
     try {

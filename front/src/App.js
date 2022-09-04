@@ -1,38 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { UidContext } from './components/AppContext'
-import IndexRoutes from './pages/indexRoutes.jsx'
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { getUser } from './actions/user.actions';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PublicRouter from './pages/public/PublicRouter';
+import AdminRouter from './pages/Admin/AdminRouter';
+import Login from './pages/Auth/Login';
 
-
-const App = () => {
-  const [uid, setUid] = useState(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      await axios({
-        method: 'get',
-        url: `${process.env.REACT_APP_API_URL}jwtid`,
-        withCredentials: true,
-      })
-        .then((res) => {
-          setUid(res.data);
-        })
-        .catch((err) => console.log('No token'));
-    };
-    fetchToken();
-
-    if (uid) dispatch(getUser(uid));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uid]);
-
+function App() {
+  
   return (
-    <UidContext.Provider value={uid}>
-      <IndexRoutes uid={uid}/>
-    </UidContext.Provider>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<PublicRouter />} />
+          <Route path="/admin/*" element={<AdminRouter />} />
+          <Route path="/auth/*" element={<Login signin={false} signup={true} />}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-};
+}
 
 export default App;

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
-import { logIn } from '../../actions/AuthActions.js';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,7 +16,7 @@ const SignInForm = () => {
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}auth/login`,
-      withCredentials: true,
+      Credentials: true,
       data: {
         username: email,
         password: password,
@@ -28,11 +25,10 @@ const SignInForm = () => {
       .then((res) => {
         console.log(res);
         if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.username;
+          emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-
-          dispatch(logIn(res, navigate));
+          //window.location = '/';
         }
       })
       .catch((err) => {
@@ -73,9 +69,9 @@ const SignInForm = () => {
           />
           <span id="togglebtn" onClick={handleViewPass}>
             {viewPass === 'password' ? (
-              <i className="fa-solid fa-eye"></i>
+              <RemoveRedEyeRoundedIcon/>
             ) : (
-              <i className="fa-solid fa-eye-slash"></i>
+              <VisibilityOffRoundedIcon/>
             )}
           </span>
         </div>

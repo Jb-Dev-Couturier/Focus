@@ -6,7 +6,6 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 const Log = (props) => {
   const [signUpModal, setsignUpModal] = useState(props.signup);
   const [signInModal, setsignInModal] = useState(props.signin);
-  const uid = props.uid
 
   const handleModals = (e) => {
     if (e.target.id === 'register') {
@@ -46,8 +45,8 @@ const Log = (props) => {
               </li>
             </ul>
 
-            {signUpModal && <SignUpForm data={uid} />}
-            {signInModal && <SignInForm data={uid} />}
+            {signUpModal && <SignUpForm />}
+            {signInModal && <SignInForm />}
           </div>
         </div>
         <div className="img-container">

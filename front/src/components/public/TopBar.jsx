@@ -9,7 +9,7 @@ const TopBar = () => {
       <nav>
         <div className="nav-container">
           <div className="logo">
-            <Link to={'/public/home'}>
+            <Link to={'/home'}>
               <div className="logo">
                 <LanguageOutlinedIcon />
                 <h3>Groupomania</h3>
@@ -19,7 +19,7 @@ const TopBar = () => {
           <ul>
             <li></li>
             <li className="welcome">
-              <Link to="/public/profil">
+              <Link to="/profil">
                 <h5>Bienvenue .....</h5>
               </Link>
             </li>
