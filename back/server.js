@@ -14,7 +14,6 @@ import UserRoute from './routes/userRoutes.js';
 import PostRoute from './routes/PostRoute.js';
 import UploadRoute from './routes/UploadRoute.js';
 import UploadRouteProfil from './routes/UploadRouteProfil.js';
-import { checkUser, requireAuth } from './middleware/authCheck.js';
 
 //Variable
 const app = express();

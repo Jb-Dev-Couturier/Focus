@@ -1,6 +1,5 @@
 import UserModel from '../models/userModel.js';
 import bcrypt from 'bcrypt';
-import passwordSchema from '../models/passwordModels.js';
 import ObjectID from 'mongoose';
 
 // Get all users
@@ -44,34 +43,26 @@ export const updateUser = async (req, res) => {
   const id = req.params.id;
   const { currentUserId, currentUserAdminStatus, password } = req.body;
 
-  if (!passwordSchema.validate(req.body.password)) {
-    res.status(400).json({
-      message:
-        'Le Mot de passe doit faire 10 caractère au moins, comprenant une majuscule, une mininuscule et un moins un chiffre.',
-    });
-  } else {
-    if (id === currentUserId || currentUserAdminStatus) {
-      try {
-        if (password) {
-          const salt = await bcrypt.genSalt(10);
-          req.body.password = await bcrypt.hash(password, salt);
-        }
-        const user = await UserModel.findByIdAndUpdate(id, req.body, {
-          new: true,
-        });
-
-        res.status(200).json(user);
-      } catch (error) {
-        res.status(500).json(error);
+  if (id === currentUserId || currentUserAdminStatus) {
+    try {
+      if (password) {
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(password, salt);
       }
-    } else {
-      res
-        .status(403)
-        .json('Accés interdit, mettez simplement VOTRE profil a jour');
+      const user = await UserModel.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json(error);
     }
+  } else {
+    res
+      .status(403)
+      .json('Accés interdit, mettez simplement VOTRE profil a jour');
   }
 };
-
 
 // Delete a user
 export const deleteUser = async (req, res) => {

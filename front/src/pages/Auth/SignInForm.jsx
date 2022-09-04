@@ -7,10 +7,10 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import { accountServices } from '../../_services/account.services';
 
 const SignInForm = () => {
-  let navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewPass, setViewPass] = useState('password');
+  let navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,13 +29,12 @@ const SignInForm = () => {
       .then((res) => {
         console.log(res);
         if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
+          emailError.innerHTML = res.data.errors.username;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          
           accountServices.saveIdUser(res.data.userId);
-          accountServices.saveToken(res.data.token)
-          navigate('/admin')
+          accountServices.saveToken(res.data.token);
+          navigate('/admin', { replace: true });
         }
       })
       .catch((err) => {
@@ -76,9 +75,9 @@ const SignInForm = () => {
           />
           <span id="togglebtn" onClick={handleViewPass}>
             {viewPass === 'password' ? (
-              <RemoveRedEyeRoundedIcon/>
+              <RemoveRedEyeRoundedIcon />
             ) : (
-              <VisibilityOffRoundedIcon/>
+              <VisibilityOffRoundedIcon />
             )}
           </span>
         </div>

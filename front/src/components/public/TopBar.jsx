@@ -23,7 +23,7 @@ const TopBar = () => {
                 <h5>Bienvenue .....</h5>
               </Link>
             </li>
-            <LogoutRoundedIcon />
+            <LogoutRoundedIcon className="logOut" />
           </ul>
         </div>
       </nav>

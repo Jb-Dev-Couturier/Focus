@@ -2,8 +2,15 @@ import React from 'react';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Link } from 'react-router-dom';
+import { accountServices } from '../../_services/account.services';
+import { useNavigate } from 'react-router-dom';
 
 const TopBarAdmin = () => {
+  let navigate = useNavigate();
+  const logout = () => {
+    accountServices.logout();
+    navigate('/')
+  };
   return (
     <header>
       <nav>
@@ -19,9 +26,11 @@ const TopBarAdmin = () => {
           <ul>
             <li></li>
             <li className="welcome">
-                <h5>Bienvenue Administrateur</h5>
+              <h5>Bienvenue Administrateur</h5>
             </li>
-            <LogoutRoundedIcon />
+            <span onClick={logout}>
+              <LogoutRoundedIcon className="logOut" />
+            </span>
           </ul>
         </div>
       </nav>

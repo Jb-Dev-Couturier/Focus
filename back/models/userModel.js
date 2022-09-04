@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import uniqueValidator from 'mongoose-unique-validator';
 import pkg from 'validator';
 const { isEmail } = pkg;
+import bcrypt from 'bcrypt';
 
 const UserSchema = mongoose.Schema(
   {
@@ -72,7 +73,23 @@ const UserSchema = mongoose.Schema(
 );
 
 UserSchema.plugin(uniqueValidator);
-// play function before save into display: 'block',
+// play function before save into display: 'block',// play function before save into display: 'block',
+UserSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
+UserSchema.statics.login = async function (username, password) {
+  const user = await this.findOne({ username });
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error('incorrect password');
+  }
+  throw Error('incorrect email');
+};
 const UserModel = mongoose.model("Users", UserSchema);
 export default UserModel;
