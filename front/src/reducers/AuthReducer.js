@@ -4,6 +4,7 @@ const authReducer = (state = { authData: null, loading: false, error: false, upd
       return {...state, loading: true, error: false };
     case "AUTH_SUCCESS":
       localStorage.setItem("profile", JSON.stringify({...action?.data}));
+      localStorage.setItem('id', JSON.stringify(...action.data.userId.split(" ")));
 
       return {...state,  authData: action.data, loading: false, error: false };
 

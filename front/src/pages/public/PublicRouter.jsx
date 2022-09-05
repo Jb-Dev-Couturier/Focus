@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { getUser } from '../../actions/user.actions';
 import { Layout, Home, Profil, Trending } from '../../pages/public';
 import PageError from '../../_utils/PageError';
 import {
@@ -12,7 +14,10 @@ import {
 } from '../../pages/Admin';
 import AuthAuthority from '../../_helpers/AuthAuthority';
 
-const PublicRouter = () => {
+const PublicRouter = ({ uid }) => {
+  const dispatch = useDispatch();
+  dispatch(getUser(uid));
+
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -26,7 +31,14 @@ const PublicRouter = () => {
       </Route>
 
       <Route element={<LayoutAdmin />}>
-        <Route index element={<AuthAuthority><Dashboard /></AuthAuthority>} />
+        <Route
+          index
+          element={
+            <AuthAuthority>
+              <Dashboard />
+            </AuthAuthority>
+          }
+        />
         <Route
           path="dashboard"
           element={
@@ -35,9 +47,30 @@ const PublicRouter = () => {
             </AuthAuthority>
           }
         />
-        <Route path="profiladmin" element={<AuthAuthority><AdminProfil /></AuthAuthority>} />
-        <Route path="userslist" element={<AuthAuthority><UsersList /></AuthAuthority>} />
-        <Route path="postslist" element={<AuthAuthority><PostsList /></AuthAuthority>} />
+        <Route
+          path="profiladmin"
+          element={
+            <AuthAuthority>
+              <AdminProfil />
+            </AuthAuthority>
+          }
+        />
+        <Route
+          path="userslist"
+          element={
+            <AuthAuthority>
+              <UsersList />
+            </AuthAuthority>
+          }
+        />
+        <Route
+          path="postslist"
+          element={
+            <AuthAuthority>
+              <PostsList />
+            </AuthAuthority>
+          }
+        />
 
         <Route path="*" element={<PageError />} />
       </Route>

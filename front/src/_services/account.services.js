@@ -2,6 +2,7 @@
 let logout = () => {
   localStorage.removeItem('profile');
   localStorage.removeItem('userAdmin');
+  localStorage.removeItem('id');
 };
 
 let saveUserAdmin = (userAdmin) => {
@@ -13,6 +14,10 @@ let isAdmin = ()=>{
   return !!admin
 }
 
+let getUserId = ()=>{
+  let userId = localStorage.getItem('id');
+  return userId.replace(/['"]+/g, '')
+}
 
 
 let isLogged = () => {
@@ -25,4 +30,6 @@ export const accountServices = {
   isLogged,
   saveUserAdmin,
   isAdmin,
+  getUserId,
 };
+
