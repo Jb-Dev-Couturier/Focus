@@ -4,29 +4,31 @@
   .icons {
     position: fixed;
     z-index: 200;
+    
 
     .icons-bis {
       position: absolute;
       left: 10px;
+      
 
       @media screen and(max-width: 590px) {
         background-color: $color-1;
-        border-radius: 25px;
-        border: 1px solid $color-3;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        top: -52px;
-        left: 230px;
+        top: -55px;
+        left: 200px;
+        width: 100%;
+        
       }
       a {
         transition: 0.1s;
         display: inline-block;
         @media screen and(max-width: 590px) {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          margin: 0 7px;
+          margin-right: 25px;
+        }
+        @media screen and(max-width: 390px) {
+          margin-right: 5px;
         }
 
         .iconsSVG {
@@ -36,11 +38,7 @@
           &:hover {
             color: $white;
             animation: rotate-vert-center 0.8s ease;
-            @media screen and(max-width: 590px) {
-              height: 24px;
-              width: 24px;
-              margin: 5px 0;
-            }
+            
           }
         }
 
@@ -65,16 +63,15 @@
           transform: scale(1);
           @media screen and(max-width: 590px) {
             background: $color-2;
-            height: 24px;
-            width: 24px;
+            height: 0px;
+            width: 0px;
             display: none;
           }
         }
 
         .iconsSVG {
           @media screen and(max-width: 590px) {
-            height: 24px;
-            width: 24px;
+            font-size: 34px;
             margin: 5px 0;
           }
         }

@@ -10,7 +10,6 @@ export const logIn = (formData, navigate) => async (dispatch) => {
     if(data.userAdmin){
       accountServices.saveUserAdmin(data.userAdmin);
     }
-    console.log(data);
   } catch (error) {
     console.log(error);
     dispatch({ type: "AUTH_FAIL" });
