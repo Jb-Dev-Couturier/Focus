@@ -6,7 +6,7 @@ const LayoutAdmin = () => {
   return (
     <div className="LayoutAdmin">
       <TopBarAdmin />
-      <div id="admin" className="Admin">
+      <div id="admin" className="Admin-Outlet">
         <Outlet />
       </div>
     </div>

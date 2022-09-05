@@ -1,13 +1,13 @@
 import LeftNav from '../../components/public/LeftNav';
-import React, { useContext } from 'react';
-import { UidContext } from '../../components/AppContext';
+import React from 'react';
+
 import Thread from '../../components/Thread';
 import NewPostForm from '../../components/public/Post/NewPostForm';
 import Trends from '../../components/Trends';
 import FriendsHint from '../../components/public/Profil/FriendsHint';
 
 const Home = () => {
-  const uid = useContext(UidContext);
+  
   return (
     <div className="home">
       <LeftNav />
@@ -15,20 +15,17 @@ const Home = () => {
         <div className="home-header">
           <NewPostForm />
         </div>
-        {uid && <Thread />}
+        <Thread />
       </div>
       <div className="right-side">
         <div className="right-side-container">
           <div className="wrapper">
-            {uid ? (
+            
               <Trends />
-            ) : (
-              <div className="img-container">
-                <img src="./img/login.gif" alt="img-log" />
-              </div>
-            )}
+            
+              
 
-            {uid && <FriendsHint />}
+            <FriendsHint />
           </div>
         </div>
       </div>

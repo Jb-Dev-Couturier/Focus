@@ -1,13 +1,15 @@
-import React from 'react'
-import LeftNavAdmin from '../../components/Admin/LeftNavAdmin'
+import React from 'react';
+import LeftNavAdmin from '../../components/Admin/LeftNavAdmin';
 
 const Dashboard = () => {
   return (
-    <div className="dashboard">
-      <LeftNavAdmin/>
+    <>
+      <LeftNavAdmin />
+      <div className="dashboard-body">
         Dashboard
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

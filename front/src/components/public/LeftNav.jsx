@@ -1,10 +1,13 @@
 import React, { useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import Person2RoundedIcon from '@mui/icons-material/Person2Rounded';
 import RocketRoundedIcon from '@mui/icons-material/RocketRounded';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const LeftNav = () => {
+   const userData = useSelector((state) => state.userReducer);
   let pathname = window.location.pathname;
   useEffect(() => {
     // eslint-disable-next-line
@@ -36,6 +39,17 @@ const LeftNav = () => {
           >
             <RocketRoundedIcon className="iconsSVG" />
           </Link>
+          <br />
+          {userData.isAdmin === true && (
+            <Link
+              to="/dashboard"
+              className={`${
+                pathname.match('/dashboard') ? 'active-left-nav' : ''
+              }`}
+            >
+              <DashboardIcon className="iconsSVG" />
+            </Link>
+          )}
         </nav>
       </div>
     </aside>

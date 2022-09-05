@@ -1,8 +1,9 @@
 .LayoutAdmin {
-  .Admin {
-    position: fixed;
+  #admin {
+    display: flex;
 
     .containerAdminNavLeft {
+      float: 1;
       height: 100%;
       width: 50px;
       position: fixed;
