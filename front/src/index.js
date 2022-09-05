@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import App from './App';

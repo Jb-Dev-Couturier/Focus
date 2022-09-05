@@ -8,8 +8,9 @@ import AuthGuard from './_helpers/AuthGuard';
 
 
 
-const userId = accountServices.getUserId()
 function App() {
+  
+  const userId = accountServices.getUserId()
   return (
     <UidContext.Provider value={userId}>
       <div className="App">

@@ -1,14 +1,12 @@
-import React from 'react'
-import LeftNav from '../../components/public/LeftNav';
+import React from 'react';
+import UpdateProfil from '../../components/public/Profil/UpdateProfil';
 
 const Profil = () => {
   return (
     <div className="profil-page">
-      <div className="profil-container">
-        <LeftNav />
-      </div>
+        <UpdateProfil />
     </div>
   );
-}
+};
 
-export default Profil
+export default Profil;

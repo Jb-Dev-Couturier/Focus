@@ -14,9 +14,12 @@ let isAdmin = ()=>{
   return !!admin
 }
 
+
+
 let getUserId = ()=>{
   let userId = localStorage.getItem('id');
-  return userId.replace(/['"]+/g, '')
+  
+  return userId.split('"').join('')
 }
 
 
@@ -31,5 +34,6 @@ export const accountServices = {
   saveUserAdmin,
   isAdmin,
   getUserId,
+  
 };
 
