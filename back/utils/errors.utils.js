@@ -4,7 +4,7 @@ export function signUpErrors(err) {
   if (err.message.includes('pseudo'))
     errors.pseudo = 'Pseudo incorrect ou déjà pris';
 
-  if (err.message.includes('username')) errors.username = 'Email incorrect';
+  if (err.message.includes('username')) errors.username = 'Email incorrect OU déjà enregistré';
 
   if (err.message.includes('password'))
     errors.password = 'Le mot de passe doit faire 6 caractères minimum';

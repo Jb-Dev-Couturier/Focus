@@ -14,6 +14,7 @@ const Log = (props) => {
   const [viewPass, setViewPass] = useState('password');
 
   const handleModals = (e) => {
+    
     if (e.target.id === 'register') {
       setsignInModal(false);
       setsignUpModal(true);

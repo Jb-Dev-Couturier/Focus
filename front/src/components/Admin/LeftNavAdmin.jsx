@@ -17,9 +17,9 @@ const LeftNavAdmin = () => {
         <div className="icons">
           <nav className="icons-bis">
             <Link
-              to="/admin/dashboard"
+              to="/dashboard"
               className={`${
-                pathname.match('/admin/dashboard')
+                pathname.match('/dashboard')
                   ? 'active-left-nav-admin'
                   : ''
               }`}
@@ -28,18 +28,18 @@ const LeftNavAdmin = () => {
             </Link>
             <br />
             <Link
-              to="/admin/profil"
+              to="/profil"
               className={`${
-                pathname.match('/admin/profil') ? 'active-left-nav-admin' : ''
+                pathname.match('/profil') ? 'active-left-nav-admin' : ''
               }`}
             >
               <Person2RoundedIcon className="iconsSVGAdmin" />
             </Link>
             <br />
             <Link
-              to="/admin/userslist"
+              to="/userslist"
               className={`${
-                pathname.match('/admin/userslist')
+                pathname.match('/userslist')
                   ? 'active-left-nav-admin'
                   : ''
               }`}
@@ -48,9 +48,9 @@ const LeftNavAdmin = () => {
             </Link>
             <br />
             <Link
-              to="/admin/postslist"
+              to="/postslist"
               className={`${
-                pathname.match('/admin/postslist')
+                pathname.match('/postslist')
                   ? 'active-left-nav-admin'
                   : ''
               }`}

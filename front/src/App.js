@@ -10,9 +10,11 @@ import AuthGuard from './_helpers/AuthGuard';
 function App() {
     
     
-  return (
-    <div className="App">
-      
+    
+    return (
+      <div className="App">
+        
+
         <Routes>
           <Route
             path="/*"
@@ -33,9 +35,8 @@ function App() {
           />
           <Route path="/auth/*" element={<AuthRouter />} />
         </Routes>
-      
-    </div>
-  );
+      </div>
+    );
 }
 
 export default App;

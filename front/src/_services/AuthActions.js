@@ -4,7 +4,8 @@ export const logIn = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await AuthApi.logIn(formData);
     dispatch({ type: "AUTH_SUCCESS", data: data });
-    navigate("/../home", { replace: true });
+    navigate(`${!data.userAdmin ? '/../home' : '/../dashboard'}`, { replace: true });
+    
     console.log(data);
   } catch (error) {
     console.log(error);
@@ -17,7 +18,7 @@ export const signUp = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await AuthApi.signUp(formData);
     dispatch({ type: "AUTH_SUCCESS", data: data });
-    //navigate("home", { replace: true });
+    navigate('/../home', { replace: true });
   } catch (error) {
     console.log(error);
     dispatch({ type: "AUTH_FAIL" });
