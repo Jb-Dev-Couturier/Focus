@@ -4,8 +4,10 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Link } from 'react-router-dom';
 import { accountServices } from '../../_services/account.services';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TopBar = () => {
+  const userData = useSelector((state) => state.userReducer);
   let navigate = useNavigate();
   const logout = () => {
     accountServices.logout();
@@ -27,7 +29,7 @@ const TopBar = () => {
             <li></li>
             <li className="welcome">
               <Link to="/profil">
-                <h5>Bienvenue .....</h5>
+                <h5>Bienvenue : {userData.pseudo}</h5>
               </Link>
             </li>
             <span onClick={logout}>

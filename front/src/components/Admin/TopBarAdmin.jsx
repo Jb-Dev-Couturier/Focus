@@ -26,7 +26,7 @@ const TopBarAdmin = () => {
           <ul>
             <li></li>
             <li className="welcome">
-              <h5>Bienvenue Administrateur</h5>
+              <h5>Dashboard Administrateur</h5>
             </li>
             <span onClick={logout}>
               <LogoutRoundedIcon className="logOut" />
