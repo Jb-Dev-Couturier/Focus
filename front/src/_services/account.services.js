@@ -13,6 +13,8 @@ let isAdmin = ()=>{
   return !!admin
 }
 
+
+
 let isLogged = () => {
   let token = localStorage.getItem('profile');
   return !!token; //transforme la variable token en boolean (si vide false / si remplie true)

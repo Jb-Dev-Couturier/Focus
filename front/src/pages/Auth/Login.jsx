@@ -17,7 +17,6 @@ const Log = (props) => {
   const dispatch = useDispatch();
 
 
-
   //creation variable pour data
   const initialState = {
     pseudo: '',
@@ -26,6 +25,8 @@ const Log = (props) => {
     confirmpass: '',
   };
   const [data, setData] = useState(initialState);
+
+
 
   //modals de connection
   const handleModals = (e) => {
@@ -52,32 +53,14 @@ const Log = (props) => {
 
   // Form Submission
   const handleSubmit = (e) => {
-    //erreur
-    const terms = document.getElementById('terms');
-    const pseudoError = document.querySelector('.pseudo.error');
-    const emailError = document.querySelector('.email.error');
-    const passwordError = document.querySelector('.password.error');
-    const passwordConfirmError = document.querySelector(
-      '.password-confirm.error'
-    );
-    const termsError = document.querySelector('.terms.error');
-
-    passwordConfirmError.innerHTML = '';
-    termsError.innerHTML = '';
-
     setConfirmPass(true);
     e.preventDefault();
-    if (data.password !== data.confirmpass || !terms.checked) {
-      if (data.password !== data.confirmpass)
-        passwordConfirmError.innerHTML =
-          'Les mots de passe ne correspondent pas';
-      setConfirmPass(false);
-
-      if (!terms.checked)
-        termsError.innerHTML = 'Veuillez valider les conditions générales';
-    }
     if (signUpModal) {
-      dispatch(signUp(data));
+      data.password === data.confirmpass
+        ? dispatch(signUp(data))
+        : setConfirmPass(false);
+
+      setsignUpModal(false);
     } else {
       dispatch(logIn(data, navigate));
       setsignInModal(true);
