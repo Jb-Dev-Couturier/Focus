@@ -1,6 +1,5 @@
 .left-nav-container {
   position: relative;
-  
 
   .icons {
     position: fixed;
@@ -19,7 +18,6 @@
         align-items: center;
         top: -52px;
         left: 230px;
-        
       }
       a {
         transition: 0.1s;
@@ -29,21 +27,25 @@
           justify-content: space-around;
           align-items: center;
           margin: 0 7px;
-          
         }
 
-        .iconsSVG{
+        .iconsSVG {
           color: $color-1;
           font-size: 44px;
-          transition: .3s ease-in-out;
+          transition: 0.3s ease-in-out;
           &:hover {
-          color: $white;
-          animation: rotate-vert-center .8s ease;
-        }
+            color: $white;
+            animation: rotate-vert-center 0.8s ease;
+            @media screen and(max-width: 590px) {
+              height: 24px;
+              width: 24px;
+              margin: 5px 0;
+            }
+          }
         }
 
         &:before {
-          transition: 0.20s ease;
+          transition: 0.2s ease;
           transform: scale(0);
           transform-origin: center;
           z-index: -10;
@@ -103,7 +105,7 @@
           }
           @media screen and(max-width: 590px) {
             display: none;
-            height: 33px;
+            height: px;
             left: -8px;
           }
         }
@@ -120,21 +122,20 @@
 @-webkit-keyframes rotate-vert-center {
   0% {
     -webkit-transform: rotateY(0);
-            transform: rotateY(0);
+    transform: rotateY(0);
   }
   100% {
     -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
+    transform: rotateY(360deg);
   }
 }
 @keyframes rotate-vert-center {
   0% {
     -webkit-transform: rotateY(0);
-            transform: rotateY(0);
+    transform: rotateY(0);
   }
   100% {
     -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
+    transform: rotateY(360deg);
   }
 }
-

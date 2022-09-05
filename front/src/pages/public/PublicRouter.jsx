@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
+import { accountServices } from '../../_services/account.services';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../actions/user.actions';
 import { Layout, Home, Profil, Trending } from '../../pages/public';
@@ -13,12 +13,16 @@ import {
   UsersList,
 } from '../../pages/Admin';
 import AuthAuthority from '../../_helpers/AuthAuthority';
+import { UidContext } from '../../components/AppContext';
 
-const PublicRouter = ({ uid }) => {
+const PublicRouter = () => {
+  const userId = accountServices.getUserId();
   const dispatch = useDispatch();
-  dispatch(getUser(uid));
+  dispatch(getUser(userId));
 
   return (
+    <UidContext.Provider value={userId}>
+
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
@@ -75,6 +79,7 @@ const PublicRouter = ({ uid }) => {
         <Route path="*" element={<PageError />} />
       </Route>
     </Routes>
+    </UidContext.Provider>
   );
 };
 
