@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {Route, Routes } from 'react-router-dom';
 
 import PublicRouter from './pages/public/PublicRouter';
 import AdminRouter from './pages/Admin/AdminRouter';
@@ -12,7 +12,7 @@ function App() {
     
   return (
     <div className="App">
-      <BrowserRouter>
+      
         <Routes>
           <Route
             path="/*"
@@ -33,7 +33,7 @@ function App() {
           />
           <Route path="/auth/*" element={<AuthRouter />} />
         </Routes>
-      </BrowserRouter>
+      
     </div>
   );
 }

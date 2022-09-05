@@ -12,18 +12,17 @@ const createToken = (id) => {
   });
 };
 
-
 //Enregistrement nouvelle utilisateur
 export const registerUser = async (req, res) => {
- const { pseudo, username, password } = req.body;
+  const { pseudo, username, password } = req.body;
 
- try {
-   const user = await UserModel.create({ pseudo, username, password });
-   res.status(201).json({ user: user._id });
- } catch (err) {
-   const errors = signUpErrors(err);
-   res.status(200).send({ errors });
- }
+  try {
+    const user = await UserModel.create({ pseudo, username, password });
+    res.status(201).json({ user: user._id });
+  } catch (err) {
+    const errors = signUpErrors(err);
+    res.status(200).send({ errors });
+  }
 };
 // Login User
 
@@ -34,11 +33,16 @@ export const loginUser = async (req, res) => {
   try {
     const user = await UserModel.login(username, password);
     res.status(200).json({
-           userId: user._id,
-           token: jwt.sign({ userId: user._id }, process.env.JWT_KEY, {
-             expiresIn: '24h',
-           }),
-         })
+      userId: user._id,
+      userAdmin: user.isAdmin,
+      token: jwt.sign(
+        { userId: user._id, userAdmin: user.isAdmin },
+        process.env.JWT_KEY,
+        {
+          expiresIn: '24h',
+        }
+      ),
+    });
   } catch (err) {
     const errors = signInErrors(err);
     res.status(200).json({ errors });

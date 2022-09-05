@@ -9,7 +9,7 @@ const TopBarAdmin = () => {
   let navigate = useNavigate();
   const logout = () => {
     accountServices.logout();
-    navigate('/')
+    navigate('/auth');
   };
   return (
     <header>

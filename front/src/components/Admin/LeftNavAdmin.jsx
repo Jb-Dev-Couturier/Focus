@@ -19,7 +19,9 @@ const LeftNavAdmin = () => {
             <Link
               to="/admin/dashboard"
               className={`${
-                pathname.match('/admin/dashboard') ? 'active-left-nav-admin' : ''
+                pathname.match('/admin/dashboard')
+                  ? 'active-left-nav-admin'
+                  : ''
               }`}
             >
               <DashboardIcon className="iconsSVGAdmin" />
@@ -35,18 +37,22 @@ const LeftNavAdmin = () => {
             </Link>
             <br />
             <Link
-              to="/admin/users"
+              to="/admin/userslist"
               className={`${
-                pathname.match('/admin/users') ? 'active-left-nav-admin' : ''
+                pathname.match('/admin/userslist')
+                  ? 'active-left-nav-admin'
+                  : ''
               }`}
             >
               <ManageAccountsIcon className="iconsSVGAdmin" />
             </Link>
             <br />
             <Link
-              to="/admin/posts"
+              to="/admin/postslist"
               className={`${
-                pathname.match('/admin/posts') ? 'active-left-nav-admin' : ''
+                pathname.match('/admin/postslist')
+                  ? 'active-left-nav-admin'
+                  : ''
               }`}
             >
               <RocketRoundedIcon className="iconsSVGAdmin" />

@@ -11,7 +11,7 @@ const AdminRouter = () => {
         <Route index element={<Dashboard />} />
 
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="adminprofil" element={<AdminProfil />} />
+        <Route path="profil" element={<AdminProfil />} />
         <Route path="userslist" element={<UsersList />} />
         <Route path="postslist" element={<PostsList />} />
 
