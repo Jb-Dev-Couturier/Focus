@@ -12,9 +12,23 @@ const Log = (props) => {
   const [signUpModal, setsignUpModal] = useState(props.signup);
   const [signInModal, setsignInModal] = useState(props.signin);
   const [viewPass, setViewPass] = useState('password');
+  const [confirmPass, setConfirmPass] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+
+
+  //creation variable pour data
+  const initialState = {
+    pseudo: '',
+    username: '',
+    password: '',
+    confirmpass: '',
+  };
+  const [data, setData] = useState(initialState);
+
+  //modals de connection
   const handleModals = (e) => {
-    
     if (e.target.id === 'register') {
       setsignInModal(false);
       setsignUpModal(true);
@@ -25,19 +39,6 @@ const Log = (props) => {
       resetForm();
     }
   };
-
-  const initialState = {
-    pseudo: '',
-    username: '',
-    password: '',
-    confirmpass: '',
-  };
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [data, setData] = useState(initialState);
-
-  const [confirmPass, setConfirmPass] = useState(true);
   // Reset Form
   const resetForm = () => {
     setData(initialState);
@@ -51,20 +52,39 @@ const Log = (props) => {
 
   // Form Submission
   const handleSubmit = (e) => {
+    //erreur
+    const terms = document.getElementById('terms');
+    const pseudoError = document.querySelector('.pseudo.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const passwordConfirmError = document.querySelector(
+      '.password-confirm.error'
+    );
+    const termsError = document.querySelector('.terms.error');
+
+    passwordConfirmError.innerHTML = '';
+    termsError.innerHTML = '';
+
     setConfirmPass(true);
     e.preventDefault();
-    if (signUpModal) {
-      data.password === data.confirmpass
-        ? dispatch(signUp(data))
-        : setConfirmPass(false);
+    if (data.password !== data.confirmpass || !terms.checked) {
+      if (data.password !== data.confirmpass)
+        passwordConfirmError.innerHTML =
+          'Les mots de passe ne correspondent pas';
+      setConfirmPass(false);
 
-      setsignUpModal(false);
+      if (!terms.checked)
+        termsError.innerHTML = 'Veuillez valider les conditions générales';
+    }
+    if (signUpModal) {
+      dispatch(signUp(data));
     } else {
       dispatch(logIn(data, navigate));
       setsignInModal(true);
     }
   };
 
+  //voir ou ne pas voir le mdp
   const handleViewPass = () => {
     if (viewPass === 'password') {
       setViewPass('text');
