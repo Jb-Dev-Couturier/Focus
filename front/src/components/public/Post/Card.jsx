@@ -18,104 +18,115 @@ const Card = ({ post }) => {
 
   const dispatch = useDispatch();
 
-    const updateItem = () => {
-      if (textUpdate) {
-        dispatch(updatePost(post._id, textUpdate));
-      }
-      setIsUpdated(false);
-    };
+  const updateItem = () => {
+    if (textUpdate) {
+      dispatch(updatePost(post._id, textUpdate));
+    }
+    setIsUpdated(false);
+  };
 
   useEffect(() => {
     !isEmpty(usersData[0]) && setIsLoading(false);
   }, [usersData]);
 
-  
   return (
-    <li className="card-container" key={post._id}>
-      {isLoading ? (
-        <i className="fas fa-spinner fa-spin"></i>
-      ) : (
-        <>
-          <div className="card-left">
-            <img
-              src={
-                !isEmpty(usersData[0]) &&
-                usersData
-                  .map((user) => {
-                    if (user._id === post.posterId) {return user.isBanished
-                      ? './uploads/profil/blocked-user.png'
-                      : user.profilePicture;}
-                    else return null;
-                  })
-                  .join('')
-                }
-                alt="poster-pic"
-                />
-          </div>
-          <div className="card-right">
-            <div className="card-header">
-              <div className="pseudo">
-                <h3>
-                  {!isEmpty(usersData[0]) &&
-                    usersData
-                      .map((user) => {
-                        if   (user._id === post.posterId ){
-                          return user.isBanished ? "Utilisateur Bloque" : user.pseudo
-                        }
-                         else return null;
-                      })
-                      .join('')}
-                </h3>
-                {post.posterId !== userData._id && (
-                  <FollowHandler idToFollow={post.posterId} type={'card'} />
-                )}
-              </div>
-              <span>{timestampParser(post.createdAt)}</span>
-            </div>
-            {isUpdated === false && <p>{post.message}</p>}
-            {isUpdated && (
-              <div className="update-post">
-                <textarea
-                  defaultValue={post.message}
-                  onChange={(e) => setTextUpdate(e.target.value)}
-                />
-                <div className="button-container">
-                  <button className="btn" onClick={updateItem}>
-                    Valider modification
-                  </button>
+    !isEmpty(usersData[0]) &&
+    usersData.map((user) => {
+      if (user._id === post.posterId) {
+        return user.isBanished ? null : (
+          <li className="card-container" key={post._id}>
+            {isLoading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              <>
+                <div className="card-left">
+                  <img
+                    src={
+                      !isEmpty(usersData[0]) &&
+                      usersData
+                        .map((user) => {
+                          if (user._id === post.posterId) {
+                            return user.profilePicture;
+                          } else return null;
+                        })
+                        .join('')
+                    }
+                    alt="poster-pic"
+                  />
                 </div>
-              </div>
-            )}
-            {post.picture && (<img src={post.picture} alt="card-pic" className="card-pic" />
-              
-            )}
-            {(userData._id === post.posterId ||
-              userData.isAdmin === true) && (
-              <div className="button-container">
-                <div onClick={() => setIsUpdated(!isUpdated)}>
-                  <img src="./img/icons/edit.svg" alt="edit" />
+                <div className="card-right">
+                  <div className="card-header">
+                    <div className="pseudo">
+                      <h3>
+                        {!isEmpty(usersData[0]) &&
+                          usersData
+                            .map((user) => {
+                              if (user._id === post.posterId) {
+                                return user.pseudo;
+                              } else return null;
+                            })
+                            .join('')}
+                      </h3>
+                      {post.posterId !== userData._id && (
+                        <FollowHandler
+                          idToFollow={post.posterId}
+                          type={'card'}
+                        />
+                      )}
+                    </div>
+                    <span>{timestampParser(post.createdAt)}</span>
+                  </div>
+                  {isUpdated === false && <p>{post.message}</p>}
+                  {isUpdated && (
+                    <div className="update-post">
+                      <textarea
+                        defaultValue={post.message}
+                        onChange={(e) => setTextUpdate(e.target.value)}
+                      />
+                      <div className="button-container">
+                        <button className="btn" onClick={updateItem}>
+                          Valider modification
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {post.picture && (
+                    <img
+                      src={post.picture}
+                      alt="card-pic"
+                      className="card-pic"
+                    />
+                  )}
+                  {(userData._id === post.posterId ||
+                    userData.isAdmin === true) && (
+                    <div className="button-container">
+                      <div onClick={() => setIsUpdated(!isUpdated)}>
+                        <img src="./img/icons/edit.svg" alt="edit" />
+                      </div>
+                      <DeleteCard id={post._id} />
+                    </div>
+                  )}
+                  <div className="card-footer">
+                    <div className="comment-icon">
+                      <img
+                        onClick={() => setShowComments(!showComments)}
+                        src="./img/icons/message1.svg"
+                        alt="comment"
+                      />
+                      <span>{post.comments.length}</span>
+                    </div>
+                    <LikeButton post={post} />
+                    <img src="./img/icons/share.svg" alt="share" />
+                  </div>
+                  {showComments && <CardComments post={post} />}
                 </div>
-                <DeleteCard id={post._id} />
-              </div>
+              </>
             )}
-            <div className="card-footer">
-              <div className="comment-icon">
-                <img
-                  onClick={() => setShowComments(!showComments)}
-                  src="./img/icons/message1.svg"
-                  alt="comment"
-                />
-                <span>{post.comments.length}</span>
-              </div>
-              <LikeButton post={post} />
-              <img src="./img/icons/share.svg" alt="share" />
-            </div>
-            {showComments && <CardComments post={post} />}
-          </div>
-        </>
-      )}
-    </li>
-  );
+          </li>
+        );
+      }else return null
+    })
+  )
 };
 
 export default Card;
