@@ -29,6 +29,7 @@ const Card = ({ post }) => {
     !isEmpty(usersData[0]) && setIsLoading(false);
   }, [usersData]);
 
+  
   return (
     <li className="card-container" key={post._id}>
       {isLoading ? (
@@ -41,13 +42,15 @@ const Card = ({ post }) => {
                 !isEmpty(usersData[0]) &&
                 usersData
                   .map((user) => {
-                    if (user._id === post.posterId) return user.profilePicture;
+                    if (user._id === post.posterId) {return user.isBanished
+                      ? './uploads/profil/blocked-user.png'
+                      : user.profilePicture;}
                     else return null;
                   })
                   .join('')
-              }
-              alt="poster-pic"
-            />
+                }
+                alt="poster-pic"
+                />
           </div>
           <div className="card-right">
             <div className="card-header">
@@ -56,8 +59,10 @@ const Card = ({ post }) => {
                   {!isEmpty(usersData[0]) &&
                     usersData
                       .map((user) => {
-                        if (user._id === post.posterId) return user.pseudo;
-                        else return null;
+                        if   (user._id === post.posterId ){
+                          return user.isBanished ? "Utilisateur Bloque" : user.pseudo
+                        }
+                         else return null;
                       })
                       .join('')}
                 </h3>
