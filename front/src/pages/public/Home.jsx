@@ -7,7 +7,6 @@ import Trends from '../../components/Trends';
 import FriendsHint from '../../components/public/Profil/FriendsHint';
 
 const Home = () => {
-  
   return (
     <div className="home">
       <LeftNav />
@@ -20,10 +19,7 @@ const Home = () => {
       <div className="right-side">
         <div className="right-side-container">
           <div className="wrapper">
-            
-              <Trends />
-            
-              
+            <Trends />
 
             <FriendsHint />
           </div>
@@ -33,4 +29,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;
