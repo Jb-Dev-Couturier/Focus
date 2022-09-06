@@ -1,14 +1,17 @@
 .LayoutAdmin {
+  background: linear-gradient(
+        106.37deg,
+        #00162c 29.63%,
+        #0091ff 51.55%,
+        #00162c 90.85%
+    );
   #admin {
     display: flex;
+    
 
     .containerAdminNavLeft {
       float: 1;
-      height: 100%;
       width: 50px;
-      position: fixed;
-      top: 55px;
-      left: -5px;
       border-radius: 6px;
       box-shadow: 18px -2px 0px $color-1, 22px 4px 0px 0px $shadow;
       z-index: 200;
@@ -23,6 +26,14 @@
         backdrop-filter: blur(3px);
         background: rgba(255, 255, 255, 0.9);
         z-index: -8;
+      }
+
+      .logoLeftNav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: .2rem;
+        font-size: 15px;
       }
 
       .icons {

@@ -68,7 +68,7 @@ const CardComments = ({ post }) => {
                 </div>
               </div>
             );
-          }
+          } else return null
         });
       })}
       {userData._id && (

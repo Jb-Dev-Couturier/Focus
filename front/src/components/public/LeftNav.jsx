@@ -43,39 +43,38 @@ const LeftNav = () => {
           </TextTooltip>
           <br />
           <TextTooltip title="Profil" placement="right">
-
-          <Link
-            to="/profil"
-            className={`${pathname.match('/profil') ? 'active-left-nav' : ''}`}
-          >
-            <Person2RoundedIcon className="iconsSVG" />
-          </Link>
+            <Link
+              to="/profil"
+              className={`${
+                pathname.match('/profil') ? 'active-left-nav' : ''
+              }`}
+            >
+              <Person2RoundedIcon className="iconsSVG" />
+            </Link>
           </TextTooltip>
           <br />
           <TextTooltip title="Top Tendances" placement="right">
-
-          <Link
-            to="/trending"
-            className={`${
-              pathname.match('/trending') ? 'active-left-nav' : ''
-            }`}
-          >
-            <RocketRoundedIcon className="iconsSVG" />
-          </Link>
+            <Link
+              to="/trending"
+              className={`${
+                pathname.match('/trending') ? 'active-left-nav' : ''
+              }`}
+            >
+              <RocketRoundedIcon className="iconsSVG" />
+            </Link>
           </TextTooltip>
           <br />
           {userData.isAdmin === true && (
             <TextTooltip title="Dashboard" placement="right">
-
-            <Link
-              to="/dashboard"
-              className={`${
-                pathname.match('/dashboard') ? 'active-left-nav' : ''
-              }`}
+              <Link
+                to="/dashboard"
+                className={`${
+                  pathname.match('/dashboard') ? 'active-left-nav' : ''
+                }`}
               >
-              <DashboardIcon className="iconsSVG" />
-            </Link>
-              </TextTooltip>
+                <DashboardIcon className="iconsSVG" />
+              </Link>
+            </TextTooltip>
           )}
         </nav>
       </div>

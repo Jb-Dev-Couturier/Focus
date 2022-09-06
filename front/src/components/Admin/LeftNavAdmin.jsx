@@ -6,6 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import RocketRoundedIcon from '@mui/icons-material/RocketRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 
 
 //tooltip (material icon)
