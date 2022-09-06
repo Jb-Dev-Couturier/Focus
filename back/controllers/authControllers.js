@@ -28,11 +28,16 @@ export const loginUser = async (req, res) => {
     res.status(200).json({
       userId: user._id,
       userAdmin: user.isAdmin,
+      userBanished: user.isBanished,
       token: jwt.sign(
-        { userId: user._id, userAdmin: user.isAdmin },
+        {
+          userId: user._id,
+          userAdmin: user.isAdmin,
+          userBanished: user.isBanished,
+        },
         process.env.JWT_KEY,
         {
-          expiresIn: '24h',
+          expiresIn: '1h',
         }
       ),
     });
