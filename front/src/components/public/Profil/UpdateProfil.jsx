@@ -34,7 +34,7 @@ const UpdateProfil = () => {
     <div className="profil-container">
       <LeftNav />
       <div className="title-profil">
-      <h1>Profil de {userData.pseudo}</h1>
+        <h1>Profil de {userData.pseudo}</h1>
       </div>
       <div className="update-container">
         <div className="left-part">
@@ -116,8 +116,19 @@ const UpdateProfil = () => {
                   if (user._id === userData.following[i]) {
                     return (
                       <li key={user._id}>
-                        <img src={user.profilePicture} alt="user-pic" />
-                        <h4>{user.pseudo}</h4>
+                        <img
+                          src={
+                            user.isBanished
+                              ? './uploads/profil/blocked-user.png'
+                              : user.profilePicture
+                          }
+                          alt="user-pic"
+                        />
+                        <h4>
+                          {user.isBanished
+                            ? 'Utilisateur Inexistant'
+                            : user.pseudo}
+                        </h4>
                         <div className="follow-handler">
                           <FollowHandler
                             idToFollow={user._id}
@@ -147,13 +158,26 @@ const UpdateProfil = () => {
                   if (user._id === userData.followers[i]) {
                     return (
                       <li key={user._id}>
-                        <img src={user.profilePicture} alt="user-pic" />
-                        <h4>{user.pseudo}</h4>
+                        <img
+                          src={
+                            user.isBanished
+                              ? './uploads/profil/blocked-user.png'
+                              : user.profilePicture
+                          }
+                          alt="user-pic"
+                        />
+                        <h4>
+                          {user.isBanished
+                            ? 'Utilisateur Inexistant'
+                            : user.pseudo}
+                        </h4>
                         <div className="follow-handler">
-                          <FollowHandler
-                            idToFollow={user._id}
-                            type={'suggestion'}
-                          />
+                          {user.isBanished ? null : (
+                            <FollowHandler
+                              idToFollow={user._id}
+                              type={'suggestion'}
+                            />
+                          )}
                         </div>
                       </li>
                     );

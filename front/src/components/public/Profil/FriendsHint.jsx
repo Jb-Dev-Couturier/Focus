@@ -15,7 +15,11 @@ const FriendsHint = () => {
         let array = [];
         // eslint-disable-next-line
       usersData.map((user) => {
-        if (user._id !== userData._id && !user.followers.includes(userData._id))
+        if (
+          user._id !== userData._id &&
+          !user.followers.includes(userData._id) &&
+          !user.isBanished
+        )
           return array.push(user._id);
       });
       array.sort(() => 0.5 - Math.random());
@@ -55,7 +59,7 @@ const FriendsHint = () => {
               for (let i = 0; i < usersData.length; i++) {
                 if (
                   user === usersData[i]._id &&
-                  usersData[i].isAdmin === false
+                  usersData[i].isAdmin === false 
                 ) {
                   return (
                     <li className="user-hint" key={user}>
