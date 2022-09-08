@@ -26,6 +26,9 @@
         backdrop-filter: blur(3px);
         background: rgba(255, 255, 255, 0.9);
         z-index: -8;
+        @media screen and(max-width: 590px) {
+        background: transparent;
+      }
       }
 
       .logoLeftNav{
@@ -85,6 +88,10 @@
             }
           }
         }
+      }
+      
+      @media screen and(max-width: 590px) {
+        box-shadow: none
       }
     }
   }

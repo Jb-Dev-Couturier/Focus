@@ -12,7 +12,7 @@ const TopBarAdmin = () => {
     navigate('/auth');
   };
   return (
-    <header>
+    <header className="adminNavBar">
       <nav>
         <div className="nav-container">
           <div className="logo">

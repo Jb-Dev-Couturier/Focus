@@ -8,11 +8,11 @@ nav {
   top: 0;
 
   &::after {
-    content: "";
+    content: '';
     height: 45px;
     width: 110%;
     left: -20px;
-    top:0;
+    top: 0;
     position: absolute;
     backdrop-filter: blur(3px);
     background: rgba(255, 255, 255, 0.86);
@@ -27,17 +27,17 @@ nav {
     justify-content: space-between;
     height: 45px;
     align-items: center;
-    
+
     .logo {
       display: flex;
       align-items: center;
-      
+
       h3 {
         transform: translate(15px, 2px);
         font-size: 1.5rem;
         font-family: $font-3;
-        transition: .3s ease-in-out;
-        &:hover{
+        transition: 0.3s ease-in-out;
+        &:hover {
           letter-spacing: 0.2rem;
           color: $color-1;
         }
@@ -47,7 +47,7 @@ nav {
         width: 26px;
       }
     }
-    
+
     ul {
       display: flex;
       align-items: center;
@@ -55,21 +55,20 @@ nav {
       width: 35%;
       justify-content: space-between;
       font-size: 1.2rem;
-      
+
       .welcome {
         transform: translateY(2px);
 
         @media screen and(max-width: 590px) {
           display: none;
         }
-        
+
         h5 {
           font-family: $font-3;
         }
       }
-      
+
       li {
-        
         img {
           height: 24px;
           width: 24px;
@@ -80,12 +79,105 @@ nav {
           height: 100%;
         }
       }
-      .logOut{
+      .logOut {
         cursor: pointer;
-        transition: .3s ease-in-out;
-        &:hover{
+        transition: 0.3s ease-in-out;
+        &:hover {
           transform: scale(1.2);
           color: $color-1;
+        }
+      }
+    }
+  }
+}
+
+.adminNavBar {
+  display: flex;
+    justify-content: center;
+  nav {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 45px;
+    border-radius: 6px;
+    z-index: 200;
+    &::after {
+      content: '';
+      height: 45px;
+      border-radius: 6px;
+      width: 102%;  
+      backdrop-filter: blur(3px);
+      background: rgba(255, 255, 255, 0.86);
+      z-index: -8;
+    }
+
+    .nav-container {
+      display: flex;
+      width: 100%;
+      max-width: 1190px;
+      margin: 0 auto;
+      justify-content: space-between;
+      height: 45px;
+      align-items: center;
+
+      .logo {
+        display: flex;
+        align-items: center;
+
+        h3 {
+          transform: translate(15px, 2px);
+          font-size: 1.5rem;
+          font-family: $font-3;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            letter-spacing: 0.2rem;
+            color: $color-1;
+          }
+        }
+        svg {
+          height: 26px;
+          width: 26px;
+        }
+      }
+
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35%;
+        justify-content: space-between;
+        font-size: 1.2rem;
+
+        .welcome {
+          transform: translateY(2px);
+
+          @media screen and(max-width: 590px) {
+            display: none;
+          }
+
+          h5 {
+            font-family: $font-3;
+          }
+        }
+
+        li {
+          img {
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            height: 100%;
+          }
+        }
+        .logOut {
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            transform: scale(1.2);
+            color: $color-1;
+          }
         }
       }
     }
