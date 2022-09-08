@@ -1,5 +1,156 @@
-.UsersList{
-      margin: 60px 0;
-  margin-left: 80px;
-  color: $white;
+.UsersListbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 3rem;
+  color: $color-3;
+  height: 90vh;
+
+  .adminGlass {
+    height: 97%;
+    width: 97%;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    padding: 0 2rem;
+    .MainUserList {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      max-height: 750px;
+
+      .Header {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+
+        h1 {
+          text-align: center;
+          color: $white;
+          text-transform: uppercase;
+          margin-top: 1rem;
+        }
+        h3 {
+          margin-top: 1rem;
+          text-align: center;
+          color: $white;
+          .statutActif {
+            margin-left: 5px;
+            background: rgba(73, 252, 97, 0.47);
+            color: green;
+            padding: 0.5rem;
+            border-radius: 15px;
+            border: 1px solid green;
+            align-self: center;
+            cursor: pointer;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s ease-in-out;
+            &:hover {
+              transform: scale(1.1);
+              letter-spacing: 0.3rem;
+              background: green;
+              color: rgb(255, 255, 255);
+              -webkit-text-stroke: 1px rgb(255, 255, 255);
+            }
+          }
+          .statutInActif{
+             margin-left: 5px;
+            background: #ffadad8f;
+            color: red;
+            padding: 0.5rem;
+            border-radius: 15px;
+            border: 1px solid red;
+            align-self: center;
+            cursor: pointer;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s ease-in-out;
+            &:hover {
+              transform: scale(1.1);
+              letter-spacing: 0.3rem;
+              background: red;
+              color: rgb(255, 255, 255);
+              -webkit-text-stroke: 1px rgb(255, 255, 255);
+            }
+          }
+        }
+      }
+      .cardUser-container {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        overflow: overlay;
+        ul {
+          width: 90%;
+          li {
+            margin-bottom: 50px;
+          }
+        }
+
+        .parentContainer {
+          width: 100%;
+
+          .delete {
+            svg {
+              color: $color-1;
+            }
+          }
+
+          .bannished-card {
+            color: red;
+
+            .BanishedUser {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: #ffadad8f;
+              padding: 0.5rem;
+              border-radius: 15px;
+              border: 1px solid red;
+              cursor: pointer;
+              transition: 0.3s ease-in-out;
+              font-weight: 900;
+              text-transform: uppercase;
+              &:hover {
+                transform: scale(1.1);
+                letter-spacing: 0.3rem;
+                background: red;
+                color: rgb(255, 255, 255);
+                -webkit-text-stroke: 1px rgb(255, 255, 255);
+              }
+            }
+          }
+          .valid-card {
+            .BanishedUser {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: rgba(73, 252, 97, 0.47);
+              color: green;
+              padding: 0.5rem;
+              border-radius: 15px;
+              border: 1px solid green;
+              cursor: pointer;
+              font-weight: 900;
+              text-transform: uppercase;
+              transition: 0.3s ease-in-out;
+              &:hover {
+                transform: scale(1.1);
+                letter-spacing: 0.3rem;
+                background: green;
+                color: rgb(255, 255, 255);
+                -webkit-text-stroke: 1px rgb(255, 255, 255);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
