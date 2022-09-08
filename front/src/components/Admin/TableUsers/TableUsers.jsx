@@ -6,44 +6,36 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useSelector } from 'react-redux';
+import { isEmpty } from '../../Utils';
 
-
-function createData(name, post, follower, followings, status) {
-  return { name, post, follower, followings, status };
-}
-
-const rows = [
-  createData('Jean Neymar', 0, 5, 6, `Approuvé(es)`),
-  createData('Cyril Tarba', 2, 2, 4, 'Banni(es)'),
-  createData('Cecile duFlot', 0, 8, 11, `Approuvé(es)`),
-  createData('Pascal Aubistrot', 1, 8, 8, `Approuvé(es)`),
-  createData('Francis 4 L', 1, 0, 9, `Approuvé(es)`),
-];
-
-const makeStyles = (status) => {
-  if (status === `Approuvé(es)`) {
-    return {
-      background: 'rgb(145 254 159 / 47%)',
-      color: 'green',
-    };
-  }
-  else if(status === 'Banni(es)'){
-    return {
-      background: '#ffadad8f',
-      color: 'red',
-    };
-  }
-  else{
-    return {
-      background: '#59bfff',
-      color: 'white',
-    };
-};}
 
 export default function TableUsers() {
+  const usersData = useSelector((state) => state.usersReducer);
+
+  
+  const makeStyles = (status) => {
+    if (status === false) {
+      return {
+        background: 'rgb(145 254 159 / 47%)',
+        color: 'green',
+      };
+    }
+    else if(status === true){
+      return {
+        background: '#ffadad8f',
+        color: 'red',
+      };
+    }
+    else{
+      return {
+        background: '#59bfff',
+        color: 'white',
+      };
+    };}
   return (
     <div className="tableUsers">
-      <h3>Utilisateur Récents</h3>
+      <h3>Listes Utilisateurs</h3>
       <TableContainer
         component={Paper}
         style={{ boxShadow: '0px,13px,20px,0px,#f0f0f090' }}
@@ -52,31 +44,35 @@ export default function TableUsers() {
           <TableHead>
             <TableRow>
               <TableCell>Utilisateurs</TableCell>
-              <TableCell align="center">Posts</TableCell>
+              <TableCell align="center">Like</TableCell>
               <TableCell align="center">Follower</TableCell>
               <TableCell align="center">Followings</TableCell>
               <TableCell align="center">Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="center">{row.post}</TableCell>
-                <TableCell align="center">{row.follower}</TableCell>
-                <TableCell align="center">{row.followings}</TableCell>
-                <TableCell align="center">
-                  <span className="status" style={makeStyles(row.status)}>
-                    {row.status}
-                  </span>
-                </TableCell>
-              </TableRow>
-            ))}
+            {!isEmpty(usersData[0]) &&
+              usersData.map((user) => (
+                <TableRow
+                  key={user._id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {user.pseudo}
+                  </TableCell>
+                  <TableCell align="center">{user.likes.length}</TableCell>
+                  <TableCell align="center">{user.followers.length}</TableCell>
+                  <TableCell align="center">{user.following.length}</TableCell>
+                  <TableCell align="center">
+                    <span
+                      className="status"
+                      style={makeStyles(user.isBanished)}
+                    >
+                      {user.username}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -1,16 +1,14 @@
 import React from 'react'
 import { CardsDashData } from '../data/Data';
-//import { useSelector } from 'react-redux';
 import CardData from './CardData';
 
 const CardDashboard = () => {
 
-    //const usersData = useSelector((state) => state.usersReducer);
+    
   return <div className="CardDash">
     {CardsDashData.map((card,id)=>{
         return (
-          <div className="parentContainer">
-            
+          <div className="parentContainer" key={id}>
             <CardData
               title={card.title}
               color={card.color}
