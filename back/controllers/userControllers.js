@@ -40,27 +40,29 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   if (!ObjectID.isValidObjectId(req.params.id))
     return res.status(400).send('ID unknow:' + req.params.id);
-  const id = req.params.id;
-  const { currentUserId, currentUserAdminStatus, password } = req.body;
 
-  if (id === currentUserId || currentUserAdminStatus) {
-    try {
-      if (password) {
-        const salt = await bcrypt.genSalt(10);
-        req.body.password = await bcrypt.hash(password, salt);
-      }
-      const user = await UserModel.findByIdAndUpdate(id, req.body, {
-        new: true,
-      });
-
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  } else {
-    res
-      .status(403)
-      .json('Accés interdit, mettez simplement VOTRE profil a jour');
+  try {
+    await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          pseudo: req.body.pseudo,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          bio: req.body.bio,
+          livesIn: req.body.livesIn,
+          worksAt: req.body.worksAt,
+          relationship: req.body.relationship,
+          country: req.body.country,
+          isBanished: req.body.isBanished,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).json({ message: err });
   }
 };
 
