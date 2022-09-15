@@ -14,7 +14,7 @@ const UpdateProfil = () => {
   const userData = useSelector((state) => state.userReducer);
   const error = useSelector((state) => state.errorReducer.userError);
   const usersData = useSelector((state) => state.usersReducer);
-
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const dispatch = useDispatch();
 
   const [followingPopup, setFollowingPopup] = useState(false);
@@ -39,7 +39,14 @@ const UpdateProfil = () => {
       <div className="update-container">
         <div className="left-part">
           <h3>Photo de Profil</h3>
-          <img src={userData.profilePicture} alt="user-pic" />
+          <img
+            src={
+              userData.profilePicture
+                ? PF + userData.profilePicture
+                : PF + 'defaultProfile.png'
+            }
+            alt="user-pic"
+          />
           <UploadImg />
           <p>{error.maxSize}</p>
           <p>{error.format}</p>
@@ -120,7 +127,7 @@ const UpdateProfil = () => {
                           src={
                             user.isBanished
                               ? './uploads/profil/blocked-user.png'
-                              : user.profilePicture
+                              : PF + user.profilePicture
                           }
                           alt="user-pic"
                         />

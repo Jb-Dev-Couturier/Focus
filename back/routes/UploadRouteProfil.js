@@ -7,7 +7,7 @@ import multer from 'multer';
 //upload image Profil
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `../front/public/uploads/profil/`);
+    cb(null, `public/images`);
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name + '.jpg');
@@ -21,7 +21,7 @@ router.post('/', upload.single('file'), async (req, res) => {
       req.body.userId,
       {
         $set: {
-          profilePicture: './uploads/profil/' + (req.body.name + '.jpg'),
+          profilePicture: req.body.name + '.jpg',
         },
       },
       { new: true, upsert: true, setDefaultsOnInsert: true }

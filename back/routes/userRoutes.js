@@ -3,7 +3,6 @@ import { deleteUser, followUser, getAllUsers, getUser, unfollowUser, updateUser 
 
 const router = express.Router();
 
-
 router.get('/', getAllUsers);
 router.get('/:id', getUser);
 router.put('/:id', updateUser);

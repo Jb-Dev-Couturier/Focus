@@ -44,11 +44,11 @@ const UserSchema = mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default: './uploads/profil/random-user.png',
+      default: 'random-user.png',
     },
     coverPicture: {
       type: String,
-      default: './uploads/profil/undefined.jpg',
+      default: 'undefined.jpg',
     },
     livesIn: String,
     worksAt: String,

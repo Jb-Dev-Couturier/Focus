@@ -7,6 +7,7 @@ export const UPDATE_WORK = 'UPDATE_WORK';
 export const FOLLOW_USER = 'FOLLOW_USER';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_ISBAN = 'UPDATE_ISBAN';
 
 export const GET_USER_ERRORS = 'GET_USER_ERRORS';
 
@@ -55,6 +56,19 @@ export const updateBio = (userId, bio) => {
     })
       .then((res) => {
         dispatch({ type: UPDATE_BIO, payload: bio });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+export const isBan = (userId, isBanished) => {
+  return async (dispatch) => {
+    return await axios({
+      method: 'put',
+      url: `${process.env.REACT_APP_API_URL}user/` + userId,
+      data: { isBanished },
+    })
+      .then((res) => {
+        dispatch({ type: UPDATE_ISBAN, payload: isBanished });
       })
       .catch((err) => console.log(err));
   };

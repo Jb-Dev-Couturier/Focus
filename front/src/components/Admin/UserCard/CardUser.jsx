@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { isBan } from '../../../actions/user.actions';
+import { getUsers } from '../../../_services/users.actions';
 
 import { isEmpty, timestampParser } from '../../Utils';
 
-
 const CardUser = ({ userinfo }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState();
   const usersData = useSelector((state) => state.usersReducer);
-
-
+  
+  const [banned, setbanned] = useState(userinfo.isBanished);
+  const dispatch = useDispatch();
+  
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  
+  const handleUpdateisBan = ()=>{
+    setbanned((prev)=>!prev)
+    dispatch(isBan(userinfo._id, banned));
+    dispatch(getUsers());
+    
+  }
 
   useEffect(() => {
     !isEmpty(usersData[0]) && setIsLoading(false);
@@ -34,9 +45,13 @@ const CardUser = ({ userinfo }) => {
                     !isEmpty(usersData[0]) &&
                     usersData
                       .map((user) => {
-                        if (user._id === userinfo._id)
-                          return user.profilePicture;
-                        else return null;
+                        if (user._id === userinfo._id) {
+                          return user.profilePicture
+                            ? PF + user.profilePicture
+                            : PF + 'defaultProfile.png';
+                        } else {
+                          return null;
+                        }
                       })
                       .join('')
                   }
@@ -70,16 +85,45 @@ const CardUser = ({ userinfo }) => {
                       Membres depuis : le {timestampParser(userinfo.createdAt)}
                     </span>
                   </div>
-                  <span className='BanishedUser'>
+
+                  {!userinfo.isBanished && (
+                    <span onClick={handleUpdateisBan} className="BanishedUser">
+                      {!isEmpty(usersData[0]) &&
+                        usersData
+                          .map((user) => {
+                            if (user._id === userinfo._id) {
+                              return 'actif';
+                            } else return null;
+                          })
+                          .join('')}
+                    </span>
+                  )}
+                  {userinfo.isBanished && (
+                    <span onClick={handleUpdateisBan} className="BanishedUser">
+                      {!isEmpty(usersData[0]) &&
+                        usersData
+                          .map((user) => {
+                            if (user._id === userinfo._id) {
+                              return 'Banni';
+                            } else return null;
+                          })
+                          .join('')}
+                    </span>
+                  )}
+
+                  {/* <span 
+                  onClick={handleUpdateBan}
+                  className="BanishedUser">
+
                     {!isEmpty(usersData[0]) &&
                       usersData
                         .map((user) => {
                           if (user._id === userinfo._id) {
                             return user.isBanished ? 'Banni(e)' : 'actif';
-                          } else return null
+                          } else return null;
                         })
                         .join('')}
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </>

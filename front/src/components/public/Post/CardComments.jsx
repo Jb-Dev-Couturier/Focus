@@ -10,6 +10,7 @@ const CardComments = ({ post }) => {
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const handleComment = (e) => {
     e.preventDefault();
@@ -26,47 +27,53 @@ const CardComments = ({ post }) => {
       {post.comments.map((comment) => {
         return usersData.map((user) => {
           if (user._id === comment.commenterId) {
-            return !user.isBanished && (
-              <div
-                className={
-                  comment.commenterId === userData._id
-                    ? 'comment-container client'
-                    : 'comment-container'
-                }
-                key={comment._id}
-              >
-                <div className="left-part">
-                  <img
-                    src={
-                      !isEmpty(usersData[0]) &&
-                      usersData
-                        .map((user) => {
-                          if (user._id === comment.commenterId)
-                            return user.profilePicture;
-                          else return null;
-                        })
-                        .join('')
-                    }
-                    alt="commenter-pic"
-                  />
-                </div>
-                <div className="right-part">
-                  <div className="comment-header">
-                    <div className="pseudo">
-                      <h3>{comment.commenterPseudo}</h3>
-                      {comment.commenterId !== userData._id && (
-                        <FollowHandler
-                          idToFollow={comment.commenterId}
-                          type={'card'}
-                        />
-                      )}
-                    </div>
-                    <span>{timestampParser(comment.timestamp)}</span>
+            return (
+              !user.isBanished && (
+                <div
+                  className={
+                    comment.commenterId === userData._id
+                      ? 'comment-container client'
+                      : 'comment-container'
+                  }
+                  key={comment._id}
+                >
+                  <div className="left-part">
+                    <img
+                      src={
+                        !isEmpty(usersData[0]) &&
+                        usersData
+                          .map((user) => {
+                            if (user._id === comment.commenterId) {
+                              return user.profilePicture
+                                ? PF + user.profilePicture
+                                : PF + 'defaultProfile.png';
+                            } else {
+                              return null;
+                            }
+                          })
+                          .join('')
+                      }
+                      alt="commenter-pic"
+                    />
                   </div>
-                  <p>{comment.text}</p>
-                  <EditDeleteComment comment={comment} postId={post._id} />
+                  <div className="right-part">
+                    <div className="comment-header">
+                      <div className="pseudo">
+                        <h3>{comment.commenterPseudo}</h3>
+                        {comment.commenterId !== userData._id && (
+                          <FollowHandler
+                            idToFollow={comment.commenterId}
+                            type={'card'}
+                          />
+                        )}
+                      </div>
+                      <span>{timestampParser(comment.timestamp)}</span>
+                    </div>
+                    <p>{comment.text}</p>
+                    <EditDeleteComment comment={comment} postId={post._id} />
+                  </div>
                 </div>
-              </div>
+              )
             );
           } else return null
         });

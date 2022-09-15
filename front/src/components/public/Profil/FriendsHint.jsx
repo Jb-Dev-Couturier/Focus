@@ -9,11 +9,11 @@ const FriendsHint = () => {
   const [friendsHint, setFriendsHint] = useState([]);
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
-
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   useEffect(() => {
     const notFriendList = () => {
-        let array = [];
-        // eslint-disable-next-line
+      let array = [];
+      // eslint-disable-next-line
       usersData.map((user) => {
         if (
           user._id !== userData._id &&
@@ -59,11 +59,18 @@ const FriendsHint = () => {
               for (let i = 0; i < usersData.length; i++) {
                 if (
                   user === usersData[i]._id &&
-                  usersData[i].isAdmin === false 
+                  usersData[i].isAdmin === false
                 ) {
                   return (
                     <li className="user-hint" key={user}>
-                      <img src={usersData[i].profilePicture} alt="user-pic" />
+                      <img
+                        src={
+                          usersData[i].profilePicture
+                            ? PF + usersData[i].profilePicture
+                            : PF + 'defaultProfile.png'
+                        }
+                        alt="user-pic"
+                      />
                       <p>{usersData[i].pseudo}</p>
                       <FollowHandler
                         idToFollow={usersData[i]._id}

@@ -5,8 +5,6 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 //appel des fichier routes
 import AuthRoute from './routes/authRoute.js';
@@ -18,9 +16,9 @@ import UploadRouteProfil from './routes/UploadRouteProfil.js';
 //Variable
 const app = express();
 
-//Utilisation du __dirname avec ES_modules (https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+//Gère la ressource "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
+app.use(express.static('public'));
+app.use('/images', express.static('images'));
 
 //middleware
 app.use(bodyParser.json({ limit: '30mb', extended: true })); //limite les données par requete
@@ -28,8 +26,6 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 dotenv.config();
 
-//Gère la ressource "images" de manière statique à chaque fois qu'elle reçoit une requête vers la route "/images"
-app.use('/images', express.static(path.join(__dirname, 'images')));
 //normalisation du port pour le rendre stable (https://www.easy-micro.org/express.php&id=1163)
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -44,6 +40,8 @@ const normalizePort = (val) => {
 };
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+
 
 //Améliorez server.js pour le rendre plus stable (https://www.easy-micro.org/express.php&id=1163)
 const errorHandler = (error) => {

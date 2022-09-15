@@ -3,6 +3,7 @@ import {
   UPLOAD_PICTURE,
   UPDATE_BIO,
   UPDATE_WORK,
+  UPDATE_ISBAN,
   FOLLOW_USER,
   UNFOLLOW_USER,
   DELETE_USER,
@@ -28,6 +29,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         worksAt: action.payload,
+      };
+    case UPDATE_ISBAN:
+      return {
+        ...state,
+        isBanished: action.payload,
       };
     case FOLLOW_USER:
       return {

@@ -16,6 +16,8 @@ const Card = ({ post }) => {
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
 
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const dispatch = useDispatch();
 
   const updateItem = () => {
@@ -46,8 +48,12 @@ const Card = ({ post }) => {
                       usersData
                         .map((user) => {
                           if (user._id === post.posterId) {
-                            return user.profilePicture;
-                          } else return null;
+                            return user.profilePicture
+                              ? PF + user.profilePicture
+                              : PF + 'defaultProfile.png';
+                          } else {
+                            return null;
+                          }
                         })
                         .join('')
                     }
@@ -92,7 +98,7 @@ const Card = ({ post }) => {
                   )}
                   {post.picture && (
                     <img
-                      src={post.picture}
+                      src={post.picture ? PF + post.picture : ''}
                       alt="card-pic"
                       className="card-pic"
                     />

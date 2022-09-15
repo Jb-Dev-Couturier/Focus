@@ -9,6 +9,7 @@ const Trends = () => {
   const usersData = useSelector((state) => state.usersReducer);
   const trendList = useSelector((state) => state.trendingReducer);
   const dispatch = useDispatch();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     if (!isEmpty(posts[0])) {
@@ -31,7 +32,12 @@ const Trends = () => {
               return (
                 <li key={post._id}>
                   <div>
-                    {post.picture && <img src={post.picture} alt="post-pic" />}
+                    {post.picture && (
+                      <img
+                        src={post.picture ? PF + post.picture : ''}
+                        alt="post-pic"
+                      />
+                    )}
                     {post.video && (
                       <iframe
                         src={post.video}
@@ -48,7 +54,9 @@ const Trends = () => {
                           usersData
                             .map((user) => {
                               if (user._id === post.posterId) {
-                                return user.picture;
+                                return user.profilePicture
+                                  ? PF + user.profilePicture
+                                  : PF + 'defaultProfile.png';
                               } else return null;
                             })
                             .join('')

@@ -14,6 +14,8 @@ const NewPostForm = () => {
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const handlePost = async (e) => {
     if(message !== ''){
 
@@ -30,7 +32,7 @@ const NewPostForm = () => {
           const filename = Date.now() + file.name;
           data.append('name', filename);
           data.append('file', file);
-          newPost.picture = './uploads/posts/' + filename;
+          newPost.picture = filename;
           console.log(newPost);
           try {
             dispatch(uploadImage(data));
@@ -71,62 +73,81 @@ const NewPostForm = () => {
         <i className="fas fa-spinner fa-pulse"></i>
       ) : (
         <>
-        {userData.isAdmin === false && (
-
-          <div className="data">
-            <p>
-              <span>{userData.following ? userData.following.length : 0}</span>{' '}
-              Abonnement
-              {userData.following && userData.following.length > 1 ? 's' : null}
-            </p>
-            <p>
-              <span>{userData.followers ? userData.followers.length : 0}</span>{' '}
-              Abonné
-              {userData.followers && userData.followers.length > 1 ? 's' : null}
-            </p>
-          </div>
-        )}
+          {userData.isAdmin === false && (
+            <div className="data">
+              <p>
+                <span>
+                  {userData.following ? userData.following.length : 0}
+                </span>{' '}
+                Abonnement
+                {userData.following && userData.following.length > 1
+                  ? 's'
+                  : null}
+              </p>
+              <p>
+                <span>
+                  {userData.followers ? userData.followers.length : 0}
+                </span>{' '}
+                Abonné
+                {userData.followers && userData.followers.length > 1
+                  ? 's'
+                  : null}
+              </p>
+            </div>
+          )}
           <Link to="/profil">
             <div className="user-info">
-              <img src={userData.profilePicture} alt="user-img" />
+              <img
+                src={
+                  userData.profilePicture
+                    ? PF + userData.profilePicture
+                    : PF + 'defaultProfile.png'
+                }
+                alt="user-img"
+              />
               <h3>{userData.pseudo}</h3>
             </div>
           </Link>
           {userData.isAdmin === false && (
+            <div className="post-form">
+              <textarea
+                name="message"
+                id="message"
+                placeholder="Quoi de neuf ?"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+              />
 
-          <div className="post-form">
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Quoi de neuf ?"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-            />
+              {/* Pour mettre image */}
 
-            {/* Pour mettre image */}
-
-            {message || postPicture ? (
-              <li className="card-container">
-                <div className="card-left">
-                  <img src={userData.profilePicture} alt="user-pic" />
-                </div>
-                <div className="card-right">
-                  <div className="card-header">
-                    <div className="pseudo">
-                      <h3>{userData.pseudo}</h3>
+              {message || postPicture ? (
+                <li className="card-container">
+                  <div className="card-left">
+                    <img
+                      src={
+                        userData.profilePicture
+                          ? PF + userData.profilePicture
+                          : PF + 'defaultProfile.png'
+                      }
+                      alt="user-pic"
+                    />
+                  </div>
+                  <div className="card-right">
+                    <div className="card-header">
+                      <div className="pseudo">
+                        <h3>{userData.pseudo}</h3>
+                      </div>
+                      <span>{timestampParser(Date.now())}</span>
                     </div>
-                    <span>{timestampParser(Date.now())}</span>
+                    <div className="content">
+                      <p>{message}</p>
+                      <img src={postPicture} alt="" />
+                    </div>
                   </div>
-                  <div className="content">
-                    <p>{message}</p>
-                    <img src={postPicture} alt="" />
-                  </div>
-                </div>
-              </li>
-            ) : null}
-            <div className="footer-form">
-              <div className="icon">
-                
+                </li>
+              ) : null}
+              <div className="footer-form">
+                <div className="icon">
                   <>
                     <ImageSearchRoundedIcon />
                     <input
@@ -137,19 +158,19 @@ const NewPostForm = () => {
                       onChange={(e) => handlePicture(e)}
                     />
                   </>
-              </div>
-              <div className="btn-send">
-                {message || postPicture ? (
-                  <button className="cancel" onClick={cancelPost}>
-                    Annuler message
+                </div>
+                <div className="btn-send">
+                  {message || postPicture ? (
+                    <button className="cancel" onClick={cancelPost}>
+                      Annuler message
+                    </button>
+                  ) : null}
+                  <button className="send" onClick={handlePost}>
+                    Envoyer
                   </button>
-                ) : null}
-                <button className="send" onClick={handlePost}>
-                  Envoyer
-                </button>
+                </div>
               </div>
             </div>
-          </div>
           )}
         </>
       )}

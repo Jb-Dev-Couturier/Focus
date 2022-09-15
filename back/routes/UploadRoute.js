@@ -6,7 +6,7 @@ import multer from 'multer';
 //upload image Profil
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `../front/public/uploads/posts/`);
+    cb(null, 'public/images');
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
