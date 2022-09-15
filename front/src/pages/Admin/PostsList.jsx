@@ -1,11 +1,16 @@
 import React from 'react';
 import LeftNavAdmin from '../../components/Admin/LeftNavAdmin';
+import MainPostList from '../../components/Admin/PostCard/MainPostList';
 
 const PostsList = () => {
   return (
     <>
       <LeftNavAdmin />
-      <div className="PostsList">Liste des post</div>
+      <div className="PostsList">
+        <div className="adminGlass">
+          <MainPostList />
+        </div>
+      </div>
     </>
   );
 };

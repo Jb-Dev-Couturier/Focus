@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost } from '../../../actions/post.actions';
 
-import FollowHandler from '../../public/Profil/FollowHandler';
-import { isEmpty, timestampParser } from '../../Utils';
-import CardComments from './CardComments';
-import DeleteCard from './DeleteCard';
-import LikeButton from './LikeButton';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
-const Card = ({ post }) => {
+
+import { isEmpty, timestampParser } from '../../Utils';
+import DeleteCard from '../../public/Post/DeleteCard';
+
+
+const CardPost = ({post}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
-  const [showComments, setShowComments] = useState(false);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
 
@@ -73,12 +72,6 @@ const Card = ({ post }) => {
                             })
                             .join('')}
                       </h3>
-                      {post.posterId !== userData._id && (
-                        <FollowHandler
-                          idToFollow={post.posterId}
-                          type={'card'}
-                        />
-                      )}
                     </div>
                     <span>{timestampParser(post.createdAt)}</span>
                   </div>
@@ -101,6 +94,7 @@ const Card = ({ post }) => {
                       src={post.picture ? PF + post.picture : ''}
                       alt="card-pic"
                       className="card-pic"
+                      style={{ width: '100px' }}
                     />
                   )}
                   {(userData._id === post.posterId ||
@@ -112,27 +106,14 @@ const Card = ({ post }) => {
                       <DeleteCard id={post._id} />
                     </div>
                   )}
-                  <div className="card-footer">
-                    <div className="comment-icon">
-                      <img
-                        onClick={() => setShowComments(!showComments)}
-                        src="./img/icons/message1.svg"
-                        alt="comment"
-                      />
-                      <span>{post.comments.length}</span>
-                    </div>
-                    <LikeButton post={post} />
-                    <img src="./img/icons/share.svg" alt="share" />
-                  </div>
-                  {showComments && <CardComments post={post} />}
                 </div>
               </>
             )}
           </li>
         );
-      }else return null
+      } else return null;
     })
-  )
+  );
 };
 
-export default Card;
+export default CardPost;

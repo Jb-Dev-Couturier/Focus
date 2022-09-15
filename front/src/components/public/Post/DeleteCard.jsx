@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../actions/post.actions';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const DeleteCard = (props) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const DeleteCard = (props) => {
         }
       }}
     >
-      <img src="./img/icons/trash.svg" alt="trash" />
+      <DeleteOutlineOutlinedIcon />
     </div>
   );
 };

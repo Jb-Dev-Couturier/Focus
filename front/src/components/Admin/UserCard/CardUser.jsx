@@ -110,20 +110,6 @@ const CardUser = ({ userinfo }) => {
                           .join('')}
                     </span>
                   )}
-
-                  {/* <span 
-                  onClick={handleUpdateBan}
-                  className="BanishedUser">
-
-                    {!isEmpty(usersData[0]) &&
-                      usersData
-                        .map((user) => {
-                          if (user._id === userinfo._id) {
-                            return user.isBanished ? 'Banni(e)' : 'actif';
-                          } else return null;
-                        })
-                        .join('')}
-                  </span> */}
                 </div>
               </div>
             </>
