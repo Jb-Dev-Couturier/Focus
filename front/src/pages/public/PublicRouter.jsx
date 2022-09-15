@@ -8,7 +8,6 @@ import PageError from '../../_utils/PageError';
 import {
   LayoutAdmin,
   Dashboard,
-  AdminProfil,
   PostsList,
   UsersList,
 } from '../../pages/Admin';
@@ -48,14 +47,6 @@ const PublicRouter = () => {
           element={
             <AuthAuthority>
               <Dashboard />
-            </AuthAuthority>
-          }
-        />
-        <Route
-          path="profiladmin"
-          element={
-            <AuthAuthority>
-              <AdminProfil />
             </AuthAuthority>
           }
         />

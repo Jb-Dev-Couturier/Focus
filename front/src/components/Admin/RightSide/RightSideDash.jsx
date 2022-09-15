@@ -1,5 +1,6 @@
 import React from 'react'
 import Trends from '../../Trends'
+import TablePosts from '../tablePost/TablePost';
 
 const RightSideDash = () => {
     
@@ -7,6 +8,7 @@ const RightSideDash = () => {
     <div className="RightSideDash">
       <h3>Dernier Posts</h3>
       <Trends />
+      <TablePosts/>
     </div>
   );
 }

@@ -7,21 +7,27 @@
   color: $white;
   height: 100vh;
   .adminGlass {
-    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 97%;
     width: 97%;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.3);
     overflow: hidden;
-    grid-template-columns: auto 30rem;
+    
     padding: 0 2rem;
 
     .MainDash {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: space-around;
+      height: 100%;
 
+      h1{
+        margin-top: 2rem;
+      }
       .CardDash {
         display: flex;
         gap: 20px;
@@ -97,7 +103,7 @@
             width: 60%;
             height: 70vh;
             z-index: 500;
-            left: 13rem;
+            left: 20rem;
             border-radius: 1rem;
             display: flex;
             flex-direction: column;

@@ -40,10 +40,11 @@ export default function TableUsers() {
         component={Paper}
         style={{ boxShadow: '0px,13px,20px,0px,#f0f0f090' }}
       >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 600 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Utilisateurs</TableCell>
+              <TableCell align="center">ID</TableCell>
               <TableCell align="center">Like</TableCell>
               <TableCell align="center">Follower</TableCell>
               <TableCell align="center">Followings</TableCell>
@@ -60,6 +61,7 @@ export default function TableUsers() {
                   <TableCell component="th" scope="row">
                     {user.pseudo}
                   </TableCell>
+                  <TableCell align="center">{user._id}</TableCell>
                   <TableCell align="center">{user.likes.length}</TableCell>
                   <TableCell align="center">{user.followers.length}</TableCell>
                   <TableCell align="center">{user.following.length}</TableCell>

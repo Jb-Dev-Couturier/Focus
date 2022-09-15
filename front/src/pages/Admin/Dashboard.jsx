@@ -23,7 +23,7 @@ const Dashboard = () => {
       <div className="dashboard-body">
         <div className="adminGlass">
           <MainDash  />
-          <RightSideDash />
+          
         </div>
       </div>
     </>
