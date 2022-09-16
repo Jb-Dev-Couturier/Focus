@@ -169,7 +169,7 @@ const UpdateProfil = () => {
                           src={
                             user.isBanished
                               ? './uploads/profil/blocked-user.png'
-                              : user.profilePicture
+                              : PF + user.profilePicture
                           }
                           alt="user-pic"
                         />
