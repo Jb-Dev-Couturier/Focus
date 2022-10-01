@@ -20,12 +20,14 @@ export default function TableUsers() {
         component={Paper}
         style={{ boxShadow: '0px,13px,20px,0px,#f0f0f090' }}
       >
-        <Table sx={{ minWidth: 400 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Poster</TableCell>
+              <TableCell className="hide-2">Poster</TableCell>
               <TableCell align="center">message</TableCell>
-              <TableCell align="center">Commentaires</TableCell>
+              <TableCell align="center" className="hide-2">
+                Commentaires
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -35,7 +37,7 @@ export default function TableUsers() {
                   key={post._id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" className="hide-2">
                     {!isEmpty(usersData[0]) &&
                       usersData
                         .map((user) => {
@@ -46,7 +48,9 @@ export default function TableUsers() {
                         .join('')}
                   </TableCell>
                   <TableCell align="center">{post.message}</TableCell>
-                  <TableCell align="center">{post.comments.length}</TableCell>
+                  <TableCell align="center" className="hide-2">
+                    {post.comments.length}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>

@@ -40,15 +40,23 @@ export default function TableUsers() {
         component={Paper}
         style={{ boxShadow: '0px,13px,20px,0px,#f0f0f090' }}
       >
-        <Table sx={{ minWidth: 600 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Utilisateurs</TableCell>
-              <TableCell align="center">ID</TableCell>
+              <TableCell align="center" className="hide">
+                ID
+              </TableCell>
               <TableCell align="center">Like</TableCell>
-              <TableCell align="center">Follower</TableCell>
-              <TableCell align="center">Followings</TableCell>
-              <TableCell align="center">Status</TableCell>
+              <TableCell align="center" className="hide-2">
+                Follower
+              </TableCell>
+              <TableCell align="center" className="hide-2">
+                Followings
+              </TableCell>
+              <TableCell align="center" className="hide">
+                Status
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -61,11 +69,17 @@ export default function TableUsers() {
                   <TableCell component="th" scope="row">
                     {user.pseudo}
                   </TableCell>
-                  <TableCell align="center">{user._id}</TableCell>
+                  <TableCell align="center" className="hide">
+                    {user._id}
+                  </TableCell>
                   <TableCell align="center">{user.likes.length}</TableCell>
-                  <TableCell align="center">{user.followers.length}</TableCell>
-                  <TableCell align="center">{user.following.length}</TableCell>
-                  <TableCell align="center">
+                  <TableCell align="center" className="hide-2">
+                    {user.followers.length}
+                  </TableCell>
+                  <TableCell align="center" className="hide-2">
+                    {user.following.length}
+                  </TableCell>
+                  <TableCell align="center" className="hide">
                     <span
                       className="status"
                       style={makeStyles(user.isBanished)}

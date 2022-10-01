@@ -3,11 +3,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 3rem;
+  margin: 2rem;
   color: $color-3;
-  height: 90vh;
+  min-height: 90vh;
   .adminGlass {
-    height: 97%;
+    height: 100%;
     width: 97%;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.05);
@@ -19,7 +19,8 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 20px;
-      max-height: 750px;
+      min-height: 750px;
+      padding: 1rem;
 
       .Header {
         display: flex;
@@ -91,6 +92,7 @@
       }
       .cardUser-container {
         margin-top: 50px;
+        
         display: flex;
         
         justify-content: center;
@@ -98,7 +100,7 @@
         ul {
           padding: 20px;
           li {
-            margin-bottom: 50px;
+            margin-bottom: 100px;
           }
         }
 

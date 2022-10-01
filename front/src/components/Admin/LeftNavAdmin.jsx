@@ -30,7 +30,7 @@ const LeftNavAdmin = () => {
   }, [window.location.pathname]);
   return (
     <div className="containerAdminNavLeft">
-      <aside className="left-nav-container">
+      <aside className="left-nav-container-admin">
         <div className="icons">
           <nav className="icons-bis">
             <TextTooltip title="Dashboard" placement="right">

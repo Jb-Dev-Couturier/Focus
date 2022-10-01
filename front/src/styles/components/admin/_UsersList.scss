@@ -3,24 +3,26 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 3rem;
+  padding-left: 2rem;
   color: $color-3;
-  height: 90vh;
+  min-height: 90vh;
 
   .adminGlass {
-    height: 97%;
-    width: 97%;
+    height: 100%;
+    width: 100%;
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.3);
     overflow: hidden;
     padding: 0 2rem;
     .MainUserList {
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 20px;
-      max-height: 750px;
+      min-height: 750px;
+      padding: 1rem;
 
       .Header {
         display: flex;
@@ -34,10 +36,12 @@
           color: $white;
           text-transform: uppercase;
           margin-top: 1rem;
+          line-height: 2rem;
         }
         h3 {
           margin-top: 1rem;
           text-align: center;
+          line-height: 2rem;
           color: $white;
           .statutActif {
             margin-left: 5px;
@@ -95,6 +99,8 @@
 
         .parentContainer {
           width: 100%;
+          
+          
 
           .delete {
             svg {

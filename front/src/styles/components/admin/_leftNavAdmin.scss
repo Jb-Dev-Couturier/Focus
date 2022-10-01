@@ -1,4 +1,4 @@
-.left-nav-container {
+.left-nav-container-admin {
   position: relative;
 
   .icons {
@@ -9,18 +9,8 @@
     .icons-bis {
       position: absolute;
       left: 10px;
-      
-
-      @media screen and(max-width: 700px) {
-        background-color: $color-1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        top: -55px;
-        left: 150px;
-        width: 100%;
         
-      }
+      
       a {
         transition: 0.1s;
         display: inline-block;
@@ -61,12 +51,7 @@
         }
         &:hover::before {
           transform: scale(1);
-          @media screen and(max-width: 700px) {
-            background: $color-2;
-            height: 0px;
-            width: 0px;
-            display: none;
-          }
+          
         }
 
         .iconsSVG {
